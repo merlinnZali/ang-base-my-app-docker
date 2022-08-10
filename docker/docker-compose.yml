@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+    react-app:
+        #build: .
+        build:
+          context: .
+          dockerfile: Dockerfile.dev
+        # ports:
+          # - 3000:3000
+          # - 8080:80
+        # volumes:
+          # Use this volume only in dev-mod
+          # - ./src:/app/src:ro
+        # environment:
+          # - REACT_APP_NAME=app3
+          # - CHOKIDAR_USEPOLLING=true
+        # env_file:
+          # - ./.env  
+
+#The SHARED one

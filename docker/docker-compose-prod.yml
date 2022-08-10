@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+    react-app:
+        #build: .
+        build:
+          context: .
+          dockerfile: Dockerfile.prod
+          args:
+            - REACT_APP_NAME=app-prod
+            - CHOKIDAR_USEPOLLING=true
+        ports:
+          - 8080:80 
+
+#docker-compose --help 
+#docker-compose -f docker-compose.yml -f docker-compose-prod.yml up -d --build
+#docker-compose -f docker-compose.yml -f docker-compose-prod.yml down           
+#docker-compose build
+#docker-compose up, up -d, up -d --build,start, stop, down
+# default image name is: foderName_serviceName => my-app_react-app
+# default containe name is: foderName_serviceName_numeric => my-app_react-app_1

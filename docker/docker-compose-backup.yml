@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+    react-app:
+        #build: .
+        build:
+          context: .
+          dockerfile: Dockerfile.dev
+        ports:
+          - 3000:3000
+          - 8080:80
+        volumes:
+          # Use this volume only in dev-mod
+          - ./src:/app/src:ro
+        # environment:
+          # - REACT_APP_NAME=app3
+          # - CHOKIDAR_USEPOLLING=true
+        env_file:
+          - ./.env  
+
+#docker-compose --help          
+#docker-compose build
+#docker-compose up, up -d, up -d --build,start, stop, down
+# default image name is: foderName_serviceName => my-app_react-app
+# default containe name is: foderName_serviceName_numeric => my-app_react-app_1

@@ -1,0 +1,36 @@
+FROM node:18-alpine 
+
+WORKDIR /app
+COPY package.json . 
+RUN npm install
+
+# make sure to add the .dockerignore that will contain 
+##node_modules
+##Dockerfile
+##.git
+##.gitignore
+##.dockerignore
+##.env
+
+COPY . .
+# env: way 1
+ENV REACT_APP_NAME=myapp
+
+
+EXPOSE 3000
+CMD ["npm","start"]
+
+#docker build -t myapp:v1.0.0 -f Dockerfile-dev .
+#docker run -d -p 3000:3000 --name react-app myapp:v1.0.0
+
+#windows: docker run -d -e CHOKIDAR_USEPOLLING=true -v %cd%\src:/app/src:ro -p 3000:3000 --name react-app myapp:v1.0.0
+#linux or mac: docker run -d -v $(pwd)/src:/app/src:ro -p 3000:3000 --name react-app myapp:v1.0.1
+#mac: docker run -d -v ${pwd}\src:/app/src:ro -p 3000:3000 --name react-app myapp:v1.0.1
+
+# env: way 2
+#docker run -d -e REACT_APP_NAME=myapp2 -v $(pwd)/src:/app/src:ro -p 3000:3000 --name react-app myapp:v1.0.0
+# env: way 3, using an .env file
+#docker run -d --env-file ./.env -v $(pwd)/src:/app/src:ro -p 3000:3000 --name react-app myapp:v1.0.0
+
+#docker exec -it react-app sh
+
