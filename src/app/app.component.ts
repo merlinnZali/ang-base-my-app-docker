@@ -7,4 +7,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'my-app-docker';
+
+  constructor() {
+    let theme = Theme.BLUE;
+
+    document.body.classList.add(theme);
+  }
+}
+
+
+enum Theme{
+  BLUE ="blue",
+  RED = "red",
+  GREEN = "green"
 }
