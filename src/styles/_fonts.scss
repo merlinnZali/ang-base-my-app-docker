@@ -1,0 +1,25 @@
+$url-fonts: "/assets/fonts/";
+
+@font-face {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    src: url($url-fonts + 'roboto/roboto.eot'); /* IE9 Compat Modes */
+    src: url($url-fonts + 'roboto/roboto.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url($url-fonts + 'roboto/roboto.woff') format('woff'), /* Modern Browsers */
+    url($url-fonts + 'roboto/roboto.ttf')  format('truetype'), /* Safari, Android, iOS */
+    url($url-fonts + 'roboto/roboto.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+
+
+@font-face {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    src: url($url-fonts + 'montserrat.eot'); /* IE9 Compat Modes */
+    src: url($url-fonts + 'montserrat.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url($url-fonts + 'montserrat.woff') format('woff'), /* Modern Browsers */
+    url($url-fonts + 'montserrat.ttf')  format('truetype'), /* Safari, Android, iOS */
+    url($url-fonts + 'montserrat.svg#svgFontName') format('svg'); /* Legacy iOS */
+}

@@ -1,0 +1,16 @@
+
+
+
+@function map-get-value($map, $key) {
+    @if map-has-key($map, $key) {
+        @return map-get($map, $key);
+    }
+    @else {
+        @error "ERROR: Specified key #{$key} does not exist in the mapping #{map-get($map,name)}";
+    }
+}
+
+@function calculate-rem($size) {
+    $rem-size: $size / 16px;
+    @return #{$rem-size}rem;
+}

@@ -9,7 +9,7 @@ export class AppComponent {
   title = 'my-app-docker';
 
   constructor() {
-    let theme = Theme.BLUE;
+    let theme = Theme.RED;
 
     document.body.classList.add(theme);
   }
@@ -17,7 +17,7 @@ export class AppComponent {
 
 
 enum Theme{
-  BLUE ="blue",
-  RED = "red",
-  GREEN = "green"
+  BLUE ="blue", // .blue
+  RED = "red", // .red
+  GREEN = "green" // .green
 }

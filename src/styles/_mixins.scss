@@ -1,0 +1,21 @@
+
+
+@mixin set-theme($map) { 
+    .layout{
+        background-color: map-get-value($map, background-color);
+    }
+
+    .text{
+        color: map-get-value($map, text-color);
+    }
+
+    .button{
+        background-color: map-get-value($map, button-color);
+        color: map-get-value($map, button-text-color);
+    }
+}
+
+
+@mixin font-size($size) {
+    font-size: calculate-rem($size);
+}
