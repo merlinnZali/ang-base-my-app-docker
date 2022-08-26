@@ -1,0 +1,7 @@
+{
+    "apiUrl": "mydomain.com",
+    "version": "1.0",
+    "hello": "This was loaded from app-config.json",
+    "serverUrl": "https://my-example-backend.server",
+    "production": true
+}

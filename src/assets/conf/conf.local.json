@@ -1,0 +1,7 @@
+{
+    "apiUrl": "http://localhost",
+    "version": "1.0",
+    "hello": "This was loaded from app-config.json",
+    "serverUrl": "http://localhost",
+    "production": false
+}
