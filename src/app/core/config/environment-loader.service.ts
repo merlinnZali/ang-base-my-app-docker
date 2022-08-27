@@ -4,7 +4,9 @@ import { lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { EnvConfig } from './env-config';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class EnvironmentLoaderService {
   private envConfig!: EnvConfig;
 
@@ -15,7 +17,7 @@ export class EnvironmentLoaderService {
     this.envConfig = await lastValueFrom(this.http.get<EnvConfig>(environment.configPath));
   }
 
-  getEnvConfig(): EnvConfig {
+  get(): EnvConfig {
     return this.envConfig;
   }
 

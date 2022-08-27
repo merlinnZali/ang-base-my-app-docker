@@ -17,3 +17,6 @@ https://sass-lang.com/documentation/at-rules/mixin
 
 > npm start
 
+# translate
+> npm i @ngx-translate/core
+

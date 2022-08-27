@@ -18,7 +18,7 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    this.envConfig = this.envService.getEnvConfig();
+    this.envConfig = this.envService.get();
   }
 }
 
