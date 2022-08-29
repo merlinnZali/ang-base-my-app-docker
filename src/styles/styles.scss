@@ -10,12 +10,12 @@
 @import "functions";
 @import "mixins";
 // ng-select theme
-// bootstrap css
+// bootstrap scss
 @import "../assets/scss/custom.scss";
 
 
 
-//set theme
+//---------------set theme---------------//
 .red {
     @include set-theme($red-value-map);
 }

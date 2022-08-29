@@ -1,0 +1,12 @@
+{
+    "HOME": {
+      "TITLE": "Bonjour Angular avec ngx-translate !",
+      "SELECT": "Changer la langue"
+    },
+    "HELLO": "Bonjour {{value}}",
+    "WITH_HTML_TEXT": "Bienvenue sur mon application Angular!<br><strong>Ceci est une super app qui utilise les dernieres technologies!</strong>",
+    "pluralization": {
+      "items": "Vous avez selectionne {count, plural, =0{nothing} one{one} other{multiple}} {count, plural, =0{} one{item} other{items}}.",
+      "gender": "{gender, select, male{He is a} female{She is a} other{They are}} {gender}."
+    }
+}

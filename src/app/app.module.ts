@@ -10,17 +10,27 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+// in order to load the local json for translation
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+// plural
+import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
+import { TranslateCompiler } from '@ngx-translate/core';
+//
 import { Observable, of } from 'rxjs';
+
+//Add all of the locales you want to support
 import localeEn from '@angular/common/locales/en';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
+//register local
+registerLocaleData(localeFr, 'fr')
+registerLocaleData(localeEn, 'en')
 
-registerLocaleData(localeFr)
-registerLocaleData(localeEn)
 
 const initAppFn = (envService: EnvironmentLoaderService) => {
   return () => envService.loadEnvConfig();
 };
+
 
 // retrieve the json from api instead of loading it locally
 export class CustomLoader implements TranslateLoader {
@@ -34,6 +44,11 @@ export class CustomLoader implements TranslateLoader {
 }
 
 
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
+
 @NgModule({
   declarations: [
     AppComponent
@@ -42,13 +57,27 @@ export class CustomLoader implements TranslateLoader {
     BrowserModule,
     FormsModule, ReactiveFormsModule, HttpClientModule,
     AppRoutingModule,
-    // Load language from api
+
+    // Load json language
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useClass: CustomLoader,
-        deps: [HttpClient, EnvironmentLoaderService]
-      }
+
+        // load from api
+        //useClass: CustomLoader,
+        //deps: [HttpClient, EnvironmentLoaderService]
+
+        // load from local
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      },
+      defaultLanguage: 'en',
+      // plural
+      /*
+      compiler: {
+        provide: TranslateCompiler,
+        useClass: TranslateMessageFormatCompiler
+      }*/
     })
   ],
   providers: [
@@ -60,8 +89,10 @@ export class CustomLoader implements TranslateLoader {
       multi: true,
       deps: [EnvironmentLoaderService],
     },
-    { provide: LOCALE_ID, useValue:'fr-FR' },
-    { provide: LOCALE_ID, useValue:'en-EN' }
+    
+    //Set the current locale
+    { provide: LOCALE_ID, useValue:'fr-FR' }
+    //{ provide: LOCALE_ID, useValue:'en-EN' }
   ],
   bootstrap: [AppComponent]
 })

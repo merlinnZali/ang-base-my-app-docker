@@ -14,4 +14,55 @@
     <p>This was loaded:</p>
     <pre><p>{{ envConfig | json }}</p></pre>
   </div>
+
+  <div>{{ 'HELLO' | translate:param }}</div>
+  <div>{{ 'HELLO2' | translate:param }}</div>
+  <div [innerHTML]="'WITH_HTML_TEXT' | translate"></div>
+
+  <br/>  <br/>  <br/>
+  <div>
+    <h2>{{ 'HOME.TITLE' | translate }}</h2>
+    <label>
+      {{ 'HOME.SELECT' | translate }}
+      <select #langSelect (change)="translate.use(langSelect.value)">
+        <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+      </select>
+    </label>
+  </div>
 </div>
+
+<!--
+<h3>Pluralization</h3>
+<br />
+<h5>Select Items</h5>
+<div class="row">
+  <div class="col-md-4">
+    <select [(ngModel)]="itemQuantity" class="form-control" data-val="true">
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+    </select>
+  </div>
+  <div class="col-md-4">
+    <strong translate [translateParams]="{ count: itemQuantity }"
+      >pluralization.items</strong
+    >
+  </div>
+</div>
+<br />
+<h5>Select Gender</h5>
+<div class="row">
+  <div class="col-md-4">
+    <select [(ngModel)]="selectedGender" class="form-control" data-val="true">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="others">Others</option>
+    </select>
+  </div>
+  <div class="col-md-4">
+    <strong>{{
+      "pluralization.gender" | translate: { gender: selectedGender }
+    }}</strong>
+  </div>
+</div>
+-->
