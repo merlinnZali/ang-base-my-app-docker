@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 // in order to load the local json for translation
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-// plural
+// plural, n a pas fonctionne
 import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
 import { TranslateCompiler } from '@ngx-translate/core';
 //
@@ -39,7 +39,8 @@ export class CustomLoader implements TranslateLoader {
 
     getTranslation(lang: string): Observable<any> {
       if(lang === 'dev') {return of({});}
-      return this.http.get(this.envConfig.get().serverUrl + '/translation?lang=' + lang)
+      const basePath = this.envConfig.get().serverUrl 
+      return this.http.get( basePath + '/translation?lang=' + lang)
     }
 }
 
