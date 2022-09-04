@@ -24,16 +24,19 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.envConfig = this.envService.get();
 
+    //init language
     this.translate.addLangs(['en', 'fr']);
     this.translate.setDefaultLang('en');
-
     const browserLang = this.translate.getBrowserLang() || "";
     this.translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
 
-
+    //listener when specific information is loaded
     this.translate.get('HOME.TITLE').subscribe((res: string) => {
       console.log(res, '<======');
     });
+    // only if we are sure that the translation is loaded
+    //const value = this.translate.instant('key');
+    //console.log(value)
     this.translate.get('HELLO', {value: 'world'}).subscribe((res: string) => {
       console.log(res);
       //=> 'hello world'
@@ -43,27 +46,20 @@ export class AppComponent implements OnInit {
       //=> 'hello2 world'
     });
 
-    this.translate.onLangChange
-    .subscribe((event: LangChangeEvent) => {
+    //listener when lang change
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       console.log('onLangChange', event);
     });
 
-    this.translate.onTranslationChange
-    .subscribe((event: TranslationChangeEvent) => {
+    //listener when translation change
+    this.translate.onTranslationChange.subscribe((event: TranslationChangeEvent) => {
       console.log('onTranslationChange', event);
     });
 
-    this.translate.onDefaultLangChange
-    .subscribe((event: DefaultLangChangeEvent) => {
+    this.translate.onDefaultLangChange.subscribe((event: DefaultLangChangeEvent) => {
       console.log('onDefaultLangChange', event);
     });
     
-
-    this.translate
-    .get('HOME.TITLE')
-    .subscribe((successMessage: string) => {
-      alert(successMessage);
-    });
   }
 }
 

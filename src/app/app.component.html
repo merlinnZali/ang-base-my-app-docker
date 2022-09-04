@@ -1,35 +1,4 @@
-<div class="layout font-size-byFunct">
 
-  <div>
-    <p class="text">SOME TEXT</p>
-
-    <button class="button">
-      BUTTON TEXT
-    </button>
-  </div>
-
-  <div>
-    <h1>Loading environment config</h1>
-
-    <p>This was loaded:</p>
-    <pre><p>{{ envConfig | json }}</p></pre>
-  </div>
-
-  <div>{{ 'HELLO' | translate:param }}</div>
-  <div>{{ 'HELLO2' | translate:param }}</div>
-  <div [innerHTML]="'WITH_HTML_TEXT' | translate"></div>
-
-  <br/>  <br/>  <br/>
-  <div>
-    <h2>{{ 'HOME.TITLE' | translate }}</h2>
-    <label>
-      {{ 'HOME.SELECT' | translate }}
-      <select #langSelect (change)="translate.use(langSelect.value)">
-        <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
-      </select>
-    </label>
-  </div>
-</div>
 
 <!--
 <h3>Pluralization</h3>
@@ -68,53 +37,126 @@
 -->
 <div class="container text-center mt-5">
 
-  <div class="row">dropdown with NG-BOOTSTRAP</div>
-  <div class="row">
-    <div ngbDropdown class="dropdown">
-      <button ngbDropdownToggle class="btn btn-secondary" type="button" id="dropdownMenuButton1" aria-expanded="false">
-        Dropdown button
-      </button>
-      <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
-        <li><a ngbDropdownItem href="#">Action</a></li>
-        <li><a ngbDropdownItem href="#">Another action</a></li>
-        <li><a ngbDropdownItem href="#">Something else here</a></li>
-      </ul>
+  <div class="row layout font-size-byFunct">
+    <div class="row">
+
+      <div class="col-4">
+        <p class="text">SOME TEXT</p>
+    
+        <button class="button">
+          BUTTON TEXT
+        </button>
+      </div>
+    
+      <div class="col-8">
+        <h1>Loading environment config</h1>
+    
+        <p>This was loaded:</p>
+        <pre>{{ envConfig | json }}</pre>
+      </div>
     </div>
+
+    <div class="row">
+      <div>
+        <h2>{{ 'HOME.TITLE' | translate }}</h2>
+        <h2>{{ 'label' | translate }}</h2>
+        <label>
+          <select #langSelect (change)="translate.use(langSelect.value)">
+            <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div>
+        <p>
+          {{ 'HOME.SELECT' | translate }}
+        </p>
+      </div>
+      <div>
+        <p>
+          {{ 'heLLO' | uppercase | translate:param }}
+        </p>
+      </div>
+      <div>
+        <p>
+          {{ 'HELLO2' | translate:param }}
+        </p>
+      </div>
+      <div [innerHTML]="'WITH_HTML_TEXT' | translate"></div>
+    </div>
+
+    <div class="row">
+      <div>
+        <h2>ngx-translate-messageformat-compiler demo</h2>
+      
+        <h3>Pluralization</h3>
+        <ul>
+          <li translate="" [translateParams]="{ count: 1 }">pluralization.items</li>
+          <li>{{'pluralization.items' | translate:{ 'count': 2 } }}</li>
+        </ul>
+      
+        <h3>Selection</h3>
+        <ul>
+          <li translate [translateParams]="{ 'gender': 'male', 'param': ' ...' }">pluralization.gender</li>
+          <li>{{'pluralization.gender' | translate:{ 'gender': 'other', 'param': ' ...' } }}</li>
+        </ul>
+      </div>
+    </div>
+    
   </div>
 
-  <hr>
-  <br>
+
   <div class="row">
-    <span>FortAwesome icon</span>
-  </div>
-  <div class="row">
-    <div style="text-align:center">
-      <h2>Using Solid Icons</h2>
-      <fa-icon [icon]="['fas', 'square']"></fa-icon>
-      <br />
-      <fa-icon [icon]="['fas', 'check-square']"></fa-icon>
+    <div class="row">dropdown with NG-BOOTSTRAP</div>
+    <div class="row">
+      <div ngbDropdown class="dropdown">
+        <button ngbDropdownToggle class="btn btn-secondary" type="button" id="dropdownMenuButton1" aria-expanded="false">
+          Dropdown button
+        </button>
+        <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+          <li><a ngbDropdownItem href="#">Action</a></li>
+          <li><a ngbDropdownItem href="#">Another action</a></li>
+          <li><a ngbDropdownItem href="#">Something else here</a></li>
+        </ul>
+      </div>
     </div>
-    <hr />
-    <div style="text-align:center">
-      <h2>Using Regular Icons</h2>
-      <fa-icon [icon]="['far', 'square']"></fa-icon>
-      <br />
-      <fa-icon [icon]="['far', 'check-square']"></fa-icon>
+    <hr>
+    <br>
+    <div class="row">
+      <span>FortAwesome icon</span>
     </div>
-    <hr />
-    <div style="text-align:center">
-      <h2>Using Brand Icons</h2>
-      <fa-icon [icon]="['fab', 'stack-overflow']"></fa-icon>
-      <br />
-      <fa-icon [icon]="['fab', 'github']"></fa-icon>
-      <br />
-      <fa-icon [icon]="['fab', 'medium']"></fa-icon>
+    <div class="row">
+      <div style="text-align:center">
+        <h2>Using Solid Icons</h2>
+        <fa-icon [icon]="['fas', 'square']"></fa-icon>
+        <br />
+        <fa-icon [icon]="['fas', 'check-square']"></fa-icon>
+      </div>
+      <hr />
+      <div style="text-align:center">
+        <h2>Using Regular Icons</h2>
+        <fa-icon [icon]="['far', 'square']"></fa-icon>
+        <br />
+        <fa-icon [icon]="['far', 'check-square']"></fa-icon>
+      </div>
+      <hr />
+      <div style="text-align:center">
+        <h2>Using Brand Icons</h2>
+        <fa-icon [icon]="['fab', 'stack-overflow']"></fa-icon>
+        <br />
+        <fa-icon [icon]="['fab', 'github']"></fa-icon>
+        <br />
+        <fa-icon [icon]="['fab', 'medium']"></fa-icon>
+      </div>
+    </div>
+    <hr>
+    <br>
+    <div>
+      <fa-icon [icon]="['fas', 'coffee']" flip="vertical"
+               [border]="true" [styles]="{'stroke': 'red', 'color': 'red'}" size="6x"></fa-icon>
     </div>
   </div>
-  <br>
-  <div>
-    <fa-icon [icon]="['fas', 'coffee']" flip="vertical"
-             [border]="true" [styles]="{'stroke': 'red', 'color': 'red'}" size="6x"></fa-icon>
-  </div>
-  <br>
 </div>
