@@ -1,0 +1,8 @@
+clé, fr, en, de
+HOME.TITLE,Bonjour Angular avec ngx-translate !,Hello Angular with ngx-translate!,
+HOME.SELECT,Changer la langue,Change language,
+HELLO,Bonjour {{value}},hello {{value}},
+HELLO2,Bonjour2 {value},hello2 {value},
+WITH_HTML_TEXT,Bienvenue sur mon application Angular!<br><strong>Ceci est une super app qui utilise les dernieres technologies!</strong>,Welcome to my Angular application!<br><strong>This is an amazing app which uses the latest technologies!</strong>,
+pluralization.items,Vous avez selectionne {countµ pluralµ =0{nothing} one{one} other{multiple}} {countµ pluralµ =0{} one{item} other{items}}.,You have selected {countµ pluralµ =0{nothing} one{one} other{multiple}} {countµ pluralµ =0{} one{item} other{items}}.,
+pluralization.gender,{genderµ selectµ male{He is a} female{She is a} other{They are}} {gender}.,{genderµ selectµ male{He is a} female{She is a} other{They are}} {gender}.,

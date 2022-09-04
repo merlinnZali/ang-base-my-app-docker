@@ -7,11 +7,18 @@
 // bootstrap/scss/functions
 // bootstrap/scss/variables
 // bootstrap/scss/mixins
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
 @import "functions";
 @import "mixins";
 // ng-select theme
 // bootstrap scss
+//@import "~bootstrap/dist/css/bootstrap.min.css";
+@import '~bootstrap/scss/bootstrap';
 @import "../assets/scss/custom.scss";
+// import other plugin or lib css
 
 
 
@@ -33,10 +40,10 @@
 @import 'material-icons.scss';
 
 html, body { height: 100%; }
-body { 
-    margin: 0; 
-    font-family: 'Roboto', "Helvetica Neue", sans-serif; 
-    
+body {
+    margin: 0;
+    font-family: 'Roboto', "Helvetica Neue", sans-serif;
+
 }
 
 
@@ -45,9 +52,9 @@ button{
 }
 
 .font-size-byFunct {
-    font-size: calculate-rem(16px);
+    font-size: calculate-rem(16);
 }
 
 .font-size-byMixin {
-    @include font-size(16px);
+    @include font-size(16);
 }

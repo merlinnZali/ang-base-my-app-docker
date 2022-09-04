@@ -1,8 +1,8 @@
 <div class="layout font-size-byFunct">
 
   <div>
-    <p class="text">SOME TEXT</p>  
-  
+    <p class="text">SOME TEXT</p>
+
     <button class="button">
       BUTTON TEXT
     </button>
@@ -66,3 +66,55 @@
   </div>
 </div>
 -->
+<div class="container text-center mt-5">
+
+  <div class="row">dropdown with NG-BOOTSTRAP</div>
+  <div class="row">
+    <div ngbDropdown class="dropdown">
+      <button ngbDropdownToggle class="btn btn-secondary" type="button" id="dropdownMenuButton1" aria-expanded="false">
+        Dropdown button
+      </button>
+      <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+        <li><a ngbDropdownItem href="#">Action</a></li>
+        <li><a ngbDropdownItem href="#">Another action</a></li>
+        <li><a ngbDropdownItem href="#">Something else here</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+  <br>
+  <div class="row">
+    <span>FortAwesome icon</span>
+  </div>
+  <div class="row">
+    <div style="text-align:center">
+      <h2>Using Solid Icons</h2>
+      <fa-icon [icon]="['fas', 'square']"></fa-icon>
+      <br />
+      <fa-icon [icon]="['fas', 'check-square']"></fa-icon>
+    </div>
+    <hr />
+    <div style="text-align:center">
+      <h2>Using Regular Icons</h2>
+      <fa-icon [icon]="['far', 'square']"></fa-icon>
+      <br />
+      <fa-icon [icon]="['far', 'check-square']"></fa-icon>
+    </div>
+    <hr />
+    <div style="text-align:center">
+      <h2>Using Brand Icons</h2>
+      <fa-icon [icon]="['fab', 'stack-overflow']"></fa-icon>
+      <br />
+      <fa-icon [icon]="['fab', 'github']"></fa-icon>
+      <br />
+      <fa-icon [icon]="['fab', 'medium']"></fa-icon>
+    </div>
+  </div>
+  <br>
+  <div>
+    <fa-icon [icon]="['fas', 'coffee']" flip="vertical"
+             [border]="true" [styles]="{'stroke': 'red', 'color': 'red'}" size="6x"></fa-icon>
+  </div>
+  <br>
+</div>
