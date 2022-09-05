@@ -9,6 +9,7 @@ import { EnvironmentLoaderService } from './core/config/environment-loader.servi
 import { SecurityInterceptor } from './core/interceptor/SecurityInterceptor';
 
 import { AppRoutingModule } from './app-routing.module';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { AppComponent } from './app.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -95,7 +96,19 @@ export class CustomLoader implements TranslateLoader {
       }),
       catchError(_ => {
         console.log(_)
-        return of('no more requests!!!')
+        let result = {}
+        if(lang == 'en'){
+          result = {
+            "label": "my label when error in backend"
+          }
+        }else{
+          result = {
+            "label": "mon label quand erreur en backend"
+          }
+        }
+        return of(
+          result
+        )
       }),
       retry(1),
       finalize(() => {
@@ -166,6 +179,7 @@ const initAppFn = (envService: EnvironmentLoaderService) => {
         useClass: TranslateMessageFormatCompiler
       }
     }),
+    TooltipModule.forRoot()
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: SecurityInterceptor, multi: true},
