@@ -10,4 +10,4 @@ scp -r dist/* merlino@141.147.1.193:/var/www/merlino/
 # run
 
 # chmod u+x deploy.sh
-# ./deploy.sh
+# ./deploy.sh and provide the keyPass
