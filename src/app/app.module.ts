@@ -1,5 +1,6 @@
 import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {APP_BASE_HREF} from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -193,6 +194,9 @@ const initAppFn = (envService: EnvironmentLoaderService) => {
     //Set the current locale
     { provide: LOCALE_ID, useValue:'fr-FR' }
     //{ provide: LOCALE_ID, useValue:'en-EN' }
+    ,
+    // set deployUrl BasePath
+    {provide: APP_BASE_HREF, useValue: '/my-app-docker'}
   ],
   bootstrap: [AppComponent]
 })
