@@ -16,6 +16,15 @@ export class AppComponent implements OnInit {
   selectedGender = 'male';
   itemQuantity ='1';
 
+  selectedCar!: number;
+
+  cars = [
+      { id: 1, name: 'Volvo' },
+      { id: 2, name: 'Saab' },
+      { id: 3, name: 'Opel' },
+      { id: 4, name: 'Audi' },
+  ];
+
   constructor(private readonly envService: EnvironmentLoaderService, public translate: TranslateService) {
     let theme = Theme.GREEN;
     document.body.classList.add(theme);

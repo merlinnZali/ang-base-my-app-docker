@@ -37,7 +37,20 @@
 -->
 <div class="container text-center mt-5">
 
+  <div class="row">
+    <ng-select [items]="cars" 
+           bindLabel="name" 
+           bindValue="id" 
+           placeholder="Select a car"
+           [(ngModel)]="selectedCar">
+    </ng-select>
+    <p>
+      Selected car: {{selectedCar | json}}
+    </p>
+  </div>
+
   <div class="row layout font-size-byFunct">
+
     <div class="row">
 
       <div class="col-4">
@@ -159,8 +172,6 @@
                [border]="true" [styles]="{'stroke': 'red', 'color': 'red'}" size="6x"></fa-icon>
     </div>
   </div>
-  <br>
-  <br>
     <!-- 
       Ngx-Bootstrap now dispo max on angular 13
       <button type="button" class="btn btn-primary"

@@ -9,6 +9,7 @@ change the theme value in order to see the theme changing
 https://sass-lang.com/documentation/at-rules/mixin
 
 # Font
+see assets/fonts and styles.scss
 
 # translate
 > npm i @ngx-translate/core
@@ -24,7 +25,7 @@ Custom loader for using also backend data for translation
 - ngx-bootstrap: better, "https://valor-software.com/ngx-bootstrap/#/components"
    - Now not dispo on Angular 14
 - fontAwesome
-- ngSelect not yet
+- ngSelect
 
 # Http
 - ok

@@ -14,6 +14,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { AppComponent } from './app.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faSquare  as fasSquare, faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -159,6 +160,7 @@ const initAppFn = (envService: EnvironmentLoaderService) => {
     FormsModule, ReactiveFormsModule, HttpClientModule,
     AppRoutingModule,
     NgbModule,
+    NgSelectModule,
     FontAwesomeModule,
     // Load json language
     TranslateModule.forRoot({
