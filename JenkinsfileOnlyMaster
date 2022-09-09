@@ -19,7 +19,8 @@ node(){
     }
 
     stage('Package Build') {
-        sh "tar -zcvf bundle.tar.gz dist/my-app-docker/"
+        // zip create verbose file will zip the entire path/file not only the file
+        sh "tar -zcvf bundle.tar.gz build/my-app-docker/"
     }
 
     stage('Artifacts Creation') {
@@ -38,9 +39,14 @@ node(){
         echo 'Artifacts copied'
 
         echo 'Copy'
+        // will copy then unzip, result => /var/www/merlino/build/my-app-docker/code+index file
         //sh "yes | sudo cp -R bundle.tar.gz /var/www/html && cd /var/www/html && sudo tar -xvf bundle.tar.gz"
+        //sh "yes | sudo cp -R bundle.tar.gz /var/www/merlino && cd /var/www/merlino && sudo tar -xvf bundle.tar.gz"
         echo 'Copy completed'
     }
 }
 
-// APP_BASE_HREF => /var/www/html/my-app-docker
+// For that we need to use the APP_BASE_HREF or DEPLOY_URL
+// APP_BASE_HREF => /build/my-app-docker/
+
+// Also change the appache or nginx base path to /var/www/merlino/build/my-app-docker/
