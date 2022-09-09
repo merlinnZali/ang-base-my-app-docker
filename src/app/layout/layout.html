@@ -1,0 +1,43 @@
+<div class="row">
+    <div> 
+      Ng-template Content 
+      <div *ngIf="false else showNgTemplateContent"> 
+         Shouldn't be displayed 
+      </div>
+    </div>
+    
+   <ng-template #showNgTemplateContent> Should be displayed</ng-template>
+   <br>
+    <br>
+    <ng-content select="[input], [form-field]"></ng-content>
+    <hr>
+    <ng-template *ngIf="true">
+        <div *ngFor="let car of cars">
+          {{ car.name }}
+        </div>
+    </ng-template>
+    <br>
+    <br>
+       
+      <ng-container [ngTemplateOutlet]="template1" 
+                [ngTemplateOutletContext] ="{nameVar:'Guest', messageVar:'Welcome to our site'}">
+      </ng-container> 
+
+    <ng-template let-name="nameVar" let-message="messageVar" #template1>  
+        <p>Dear {{name}} , {{message}} </p>
+      </ng-template>
+      <br>
+      <br>
+
+      <ng-container [ngTemplateOutlet]="template2" 
+                 [ngTemplateOutletContext] ="{ person:{name:'Guest',message:'Welcome to our site'} }">
+      </ng-container> 
+      <ng-template let-person="person"  #template2>  
+        <p>Dear {{person.name}} , {{person.message}} </p>
+      </ng-template>
+       
+       <span>See: https://www.tektutorialshub.com/angular/ngtemplateoutlet-in-angular/</span>
+
+
+
+  </div>

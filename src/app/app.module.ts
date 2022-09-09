@@ -1,5 +1,7 @@
+
 import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
 import {APP_BASE_HREF} from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,11 +12,11 @@ import { EnvironmentLoaderService } from './core/config/environment-loader.servi
 import { SecurityInterceptor } from './core/interceptor/SecurityInterceptor';
 
 import { AppRoutingModule } from './app-routing.module';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { AppComponent } from './app.component';
 
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
+
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faSquare  as fasSquare, faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -46,8 +48,10 @@ registerLocaleData(localeFr, 'fr')
 registerLocaleData(localeEn, 'en')
 //
 
-import { delay, take, catchError, Observable, of, switchMap, finalize, retry, forkJoin, interval, combineLatest } from 'rxjs';
+import { Layout } from './layout/layout';
+import { AppComponent } from './app.component';
 
+import { delay, take, catchError, Observable, of, switchMap, finalize, retry, forkJoin, interval, combineLatest } from 'rxjs';
 // retrieve the json from api instead of loading it locally
 export class CustomLoader implements TranslateLoader {
   suffix = '.json'
@@ -71,12 +75,12 @@ export class CustomLoader implements TranslateLoader {
     const obs$ = this.http.get( url, { headers: header})
     .pipe(
       switchMap(result => {
-        /*
-        result
+        
+        /*result
         {
-            "label": "my label",
-            "name": "my name",
-            "count": 2
+           "label": "my label",
+           "name": "my name",
+           "count": 2
         }*/
         console.log('result', result)
         const flattenObj = (obj: any, objToAdd: { [x: string]: any; }) => {
@@ -87,12 +91,12 @@ export class CustomLoader implements TranslateLoader {
         let objFrFlat = {};
         flattenObj(result, objFrFlat);
         console.log('objFrFlat', objFrFlat)
-        /*
-        objFrFlat
+        
+        /*objFrFlat
         {
-            "label": "my label", <= <h2>{{ 'label' | translate }}</h2>
-            "name": "my name",
-            "count": "2"
+           "label": "my label", <= <h2>{{ 'label' | translate }}</h2>
+           "name": "my name",
+           "count": "2"
         } */
         return of(objFrFlat)
       }),
@@ -140,7 +144,6 @@ export class CustomLoader implements TranslateLoader {
   }
 }
 
-
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -153,7 +156,8 @@ const initAppFn = (envService: EnvironmentLoaderService) => {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    Layout
   ],
   imports: [
     BrowserModule,
@@ -198,6 +202,8 @@ const initAppFn = (envService: EnvironmentLoaderService) => {
     //{ provide: LOCALE_ID, useValue:'en-EN' }
     ,
     // set deployUrl BasePath
+    // also align apache or nginx basePath
+    // like: /var/www/amtnet19/my-app-docker
     {provide: APP_BASE_HREF, useValue: '/my-app-docker'}
   ],
   bootstrap: [AppComponent]
