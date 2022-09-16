@@ -12,6 +12,7 @@ node(){
     }
     stage('Build') {
         nodejs('nodejs') {
+            // will depend of the env
             sh 'npm run build'
             echo "Build completed"
         }
@@ -49,4 +50,4 @@ node(){
 // For that we need to use the APP_BASE_HREF or DEPLOY_URL
 // APP_BASE_HREF => /dist/my-app-docker/
 
-// Also change the appache or nginx base path to /var/www/merlino/dist/my-app-docker/
+// Also change the appache or nginx base/root path to /var/www/merlino/dist/my-app-docker/
