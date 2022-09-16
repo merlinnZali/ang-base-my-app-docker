@@ -4,8 +4,8 @@
 export const APP_NAME = 'TestApp'
 
 export interface Environment {
-    production: boolean;
     appName: string;
+    env: string;
     assetsPath: string;
     configPath: string;
 }

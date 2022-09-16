@@ -3,5 +3,6 @@
     "version": "1.0",
     "hello": "This was loaded from app-config.json",
     "serverUrl": "http://localhost:8081/api/v1/",
-    "production": false
+    "production": false,
+     "env": "local"
 }
