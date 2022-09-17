@@ -61,4 +61,28 @@ Run the explorer to generate a graphical representation of one of the bundles.
     ng build --prod --base-href /subfolder/ --deploy-url /subfolder/
 ```
 
-l
+
+npm install husky lint-staged --save-dev
+Note: husky version 4.2.5 and lint-staged version 10.2.13
+npm install prettier --save-dev
+add: .prettierrc
+{
+    "tabWidth": 4,
+    "singleQuote": true,
+    "printWidth": 120,
+    "bracketSpacing": true,
+}
+
+add an npm script that will run prettier with the --check flag
+    "prettier:check": "prettier --config .prettierrc --check \"src/**/*.{ts,css,scss,html}\""
+add pre-commit hook:
+      "husky": {   
+        "hooks": {  
+            "pre-commit": "npm run prettier:check"        
+        }   
+      }
+At this point we can try to commit the package json
+git add .
+git commit -m "add prettier and husky"
+
+
