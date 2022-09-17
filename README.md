@@ -73,8 +73,11 @@ add: .prettierrc
     "bracketSpacing": true,
 }
 
+package.json/script:
 add an npm script that will run prettier with the --check flag
     "prettier:check": "prettier --config .prettierrc --check \"src/**/*.{ts,css,scss,html}\""
+
+Setting up git hooks in package.json:
 add pre-commit hook:
       "husky": {   
         "hooks": {  
@@ -84,5 +87,31 @@ add pre-commit hook:
 At this point we can try to commit the package json
 git add .
 git commit -m "add prettier and husky"
+We may have an error related to the that:
+ the files in the src directory were not formatted
 
+Running git hooks only on staged files using lint-staged:
+  "lint-staged": {
+        "src/**/*.{ts,css,scss,html}": [
+            "npm run prettier:check"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"       
+       }
+    }
 
+Running tests on pre-push git hook
+
+  "lint-staged": {
+    "src/**/*.{ts,css,scss,html}": [
+        "npm run prettier:check"
+    ]
+  },
+  "husky": {
+      "hooks": {
+          "pre-commit": "lint-staged",
+          "pre-push": "npm run test"     
+    }
+  },

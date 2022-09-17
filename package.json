@@ -16,10 +16,16 @@
     "test": "ng test",
     "prettier:check": "prettier --config .prettierrc --check \"src/**/*.{ts,css,scss,html}\""
   },
-  "husky": {   
-   "hooks": {  
-      "pre-commit": "npm run prettier:check"        
-    }   
+  "lint-staged": {
+    "src/**/*.{ts,css,scss,html}": [
+        "npm run prettier:check"
+    ]
+  },
+  "husky": {
+      "hooks": {
+          "pre-commit": "lint-staged",
+          "pre-push": "npm run test"     
+    }
   },
   "private": true,
   "dependencies": {
