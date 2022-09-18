@@ -133,7 +133,7 @@ The above command will create a .husky folder in the root. And further, it is go
 
 > i commented out the npm test
 
-> npx husky add .husky/pre-commit "npm run pretty-quick"
+> npx husky add .husky/pre-commit "npm run test"
 > into .husky/pre-push
 
 ```
