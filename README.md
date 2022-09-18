@@ -143,8 +143,10 @@ The above command will create a .husky folder in the root. And further, it is go
  #!/usr/bin/env sh
  . "$(dirname -- "$0")/_/husky.sh"
 
- npm test
+ #npm test
 ```
+
+> i commented out the npm test
 
 ```
 git add .
@@ -174,7 +176,7 @@ git add .
 git commit -m "..."
 ```
 
-# Linting more
+# Linting more (did not worked)
 
 > npm install --save-dev lint-staged
 
