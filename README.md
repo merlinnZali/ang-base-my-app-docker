@@ -28,7 +28,7 @@ Custom loader for using also backend data for translation
 # Bootstrap
 
 -   ngBootstrap
--   ngx-bootstrap: better, "https://valor-software.com/ngx-bootstrap/#/components"
+-   ngx-bootstrap: better, "https://valor-software.com/ngx-bootstrap/#/documentation#getting-started"
     -   Now not dispo on Angular 14
 -   fontAwesome
 -   ngSelect
@@ -200,4 +200,20 @@ ou
  npx lint-staged --no-stash -q
 ```
 
----
+# ngRX Store
+
+...
+
+# Angular Table
+
+...
+
+# primeNG
+
+...
+
+# graph
+
+...
+
+# map

@@ -13,6 +13,7 @@ import { SecurityInterceptor } from './core/interceptor/SecurityInterceptor'
 import { AppRoutingModule } from './app-routing.module'
 
 import { TooltipModule } from 'ngx-bootstrap/tooltip'
+import { ModalModule } from 'ngx-bootstrap/modal'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { NgSelectModule } from '@ng-select/ng-select'
 
@@ -186,6 +187,7 @@ const initAppFn = (envService: EnvironmentLoaderService) => {
             },
         }),
         TooltipModule.forRoot(),
+        ModalModule.forRoot(),
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: SecurityInterceptor, multi: true },
