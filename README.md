@@ -29,9 +29,10 @@ Custom loader for using also backend data for translation
 
 -   ngBootstrap
 -   ngx-bootstrap: better, "https://valor-software.com/ngx-bootstrap/#/documentation#getting-started"
-    -   Now not dispo on Angular 14
 -   fontAwesome
 -   ngSelect
+-   Bootstrap-icons
+-   ngx-bootstrap-icons: npm i ngx-bootstrap-icons --save
 
 # Http
 
@@ -43,7 +44,65 @@ Custom loader for using also backend data for translation
 
 # Form
 
--   not yet
+> see [link](https://www.tektutorialshub.com/angular/formcontrol-in-angular/)
+
+```
+let address= new FormGroup({
+    street : new FormControl(""),
+    city : new FormControl(""),
+    pinCode : new FormControl("")
+})
+--
+address.value => {street :"", city:"",  Pincode:""}
+address.get("street")
+--
+address.errors     // returns the list of errors
+address.dirty /pristine     // true if the value of one of the child control has changed (dirty)
+address.touched/untouched   // true if one of the child control is touched : onblur
+address.valid /invalid     // true if all the child controls passed the validation
+status:
+  VALID: The FormControl has passed all validation checks.
+  INVALID: This control has failed at least one validation check.
+  PENDING: This control is in the midst of conducting a validation check.
+  DISABLED: This control is exempt from validation checks
+enabled/disabled // control enabled or disabled. if disabled this control is exempt from validation checks
+pending
+
+
+
+```
+
+> SetValue & PatchValue
+> statuschanges and valueChanges: emitEvent, onlySelf
+
+```
+
+    this.reactiveForm.get("firstname").statusChanges.subscribe(newStatus=> {
+      console.log('firstname status changed')
+      console.log(newStatus)
+      console.log(this.reactiveForm.get("firstname").status)
+      console.log(this.reactiveForm.status)
+
+      setTimeout(() => {
+        console.log(this.reactiveForm.status)
+      })
+
+    })
+    ##########
+    this.reactiveForm.get("firstname").valueChanges.subscribe(selectedValue => {
+    console.log('firstname value changed')
+    console.log(selectedValue)
+    console.log(this.reactiveForm.get("firstname").value)
+    console.log(this.reactiveForm.value)   //still shows the old first name
+    })
+    ...
+    // we dont want to emit the statusChange when setting the firstName value
+    this.reactiveForm.get("firstname").setValue("", { emitEvent: false });
+```
+
+> set[Async]Validators / clear[Async]Validators / updateValueAndValidity
+
+> errors / setError / getError / hasError
 
 # Build
 
