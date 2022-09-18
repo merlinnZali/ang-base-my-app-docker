@@ -5,4 +5,4 @@
  npm run pretty-quick
 
  # no stash and quiet mode
- npx lint-staged --no-stash -q
+ npx lint-staged --no-stash
