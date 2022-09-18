@@ -96,6 +96,8 @@ add .prettierignore
  dist
 ```
 
+Prettier takes care of the formatting whereas tslint takes care of all the other things.
+
 > npm install --save-dev tslint-config-prettier
 
 .tslint.json:
@@ -129,6 +131,7 @@ The above command will create a .husky folder in the root. And further, it is go
 
  #npm test
  npm run pretty-quick
+ npm run lint
 ```
 
 > i commented out the npm test
@@ -141,6 +144,22 @@ The above command will create a .husky folder in the root. And further, it is go
  . "$(dirname -- "$0")/_/husky.sh"
 
  npm test
+```
+
+> \***\* IF we want to use linting \*\***
+
+> Add "lint": "ng lint" to the "scripts" section of package.json.
+
+> npx husky add .husky/pre-commit "npm run lint"
+> into .husky/pre-commit
+
+```
+ #!/usr/bin/env sh
+ . "$(dirname -- "$0")/_/husky.sh"
+
+ #npm test
+ npm run pretty-quick
+ npm run lint
 ```
 
 ---
