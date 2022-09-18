@@ -19,7 +19,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.ts": "tslint *p ./tsconfig.json"
+    "*.ts": "tslint *p ./tslint.json"
   },
   "private": true,
   "dependencies": {
