@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-#npm test
-npm run pretty-quick
-#npm run lint
+ #npm test
+ npm run pretty-quick
+
+ # no stash and quiet mode
+ npx lint-staged --no-stash -q

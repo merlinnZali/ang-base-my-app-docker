@@ -146,9 +146,16 @@ The above command will create a .husky folder in the root. And further, it is go
  npm test
 ```
 
-> \***\* IF we want to use linting \*\***
+```
+git add .
+git commit -m "..."
+```
 
-> Add "lint": "ng lint" to the "scripts" section of package.json.
+# IF we want to use linting
+
+> npm install --save-dev tslint
+
+> Add "lint": "tslint 'src/\*_/_.ts'" to the "scripts" section of package.json.
 
 > npx husky add .husky/pre-commit "npm run lint"
 > into .husky/pre-commit
@@ -160,6 +167,36 @@ The above command will create a .husky folder in the root. And further, it is go
  #npm test
  npm run pretty-quick
  npm run lint
+```
+
+```
+git add .
+git commit -m "..."
+```
+
+# Linting more
+
+> npm install --save-dev lint-staged
+
+```
+"lint-staged": {
+    "*.ts": "tslint *p ./tsconfig.json"
+}
+ou
+"lint-staged": {
+    "*.ts": "tslint"
+}
+```
+
+```
+ #!/usr/bin/env sh
+ . "$(dirname -- "$0")/_/husky.sh"
+
+ #npm test
+ npm run pretty-quick
+
+ # no stash and quiet mode
+ npx lint-staged --no-stash -q
 ```
 
 ---
