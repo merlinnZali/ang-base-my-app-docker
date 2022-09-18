@@ -1,49 +1,49 @@
-import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
 
-import { APP_BASE_HREF } from '@angular/common';
+import { APP_BASE_HREF } from '@angular/common'
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
-import { HTTP_INTERCEPTORS, HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http'
 
-import { EnvironmentLoaderService } from './core/config/environment-loader.service';
-import { SecurityInterceptor } from './core/interceptor/SecurityInterceptor';
+import { EnvironmentLoaderService } from './core/config/environment-loader.service'
+import { SecurityInterceptor } from './core/interceptor/SecurityInterceptor'
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module'
 
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { TooltipModule } from 'ngx-bootstrap/tooltip'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { NgSelectModule } from '@ng-select/ng-select'
 
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faSquare as fasSquare, faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome'
+import { faSquare as fasSquare, faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
 import {
     faSquare as farSquare,
     faCheckSquare as farCheckSquare,
     faCircleUp,
     faCircleDown,
-} from '@fortawesome/free-regular-svg-icons';
-import { faStackOverflow, faGithub, faMedium } from '@fortawesome/free-brands-svg-icons';
+} from '@fortawesome/free-regular-svg-icons'
+import { faStackOverflow, faGithub, faMedium } from '@fortawesome/free-brands-svg-icons'
 
 // i18n
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 // in order to load the local json for translation
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 // plural, n a pas fonctionne
-import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
-import { TranslateCompiler } from '@ngx-translate/core';
+import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler'
+import { TranslateCompiler } from '@ngx-translate/core'
 //Add all of the locales you want to support
-import localeEn from '@angular/common/locales/en';
-import localeFr from '@angular/common/locales/fr';
-import { registerLocaleData } from '@angular/common';
+import localeEn from '@angular/common/locales/en'
+import localeFr from '@angular/common/locales/fr'
+import { registerLocaleData } from '@angular/common'
 //register local
-registerLocaleData(localeFr, 'fr');
-registerLocaleData(localeEn, 'en');
+registerLocaleData(localeFr, 'fr')
+registerLocaleData(localeEn, 'en')
 //
 
-import { Layout } from './layout/layout';
-import { AppComponent } from './app.component';
+import { Layout } from './layout/layout'
+import { AppComponent } from './app.component'
 
 import {
     delay,
@@ -57,25 +57,25 @@ import {
     forkJoin,
     interval,
     combineLatest,
-} from 'rxjs';
+} from 'rxjs'
 // retrieve the json from api instead of loading it locally
 export class CustomLoader implements TranslateLoader {
-    suffix = '.json';
-    assets_folder = 'assets/i18n/';
+    suffix = '.json'
+    assets_folder = 'assets/i18n/'
     constructor(private http: HttpClient, private envConfig: EnvironmentLoaderService) {}
 
     getTranslation(lang: string): Observable<any> {
         if (lang === 'dev') {
-            return of({});
+            return of({})
         }
 
         const header = new HttpHeaders({
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
-        });
-        const basePath = this.envConfig.get().serverUrl;
+        })
+        const basePath = this.envConfig.get().serverUrl
         // http://localhost:8081/translation?lang=en
-        const url = basePath + 'translation__?lang=' + lang;
+        const url = basePath + 'translation__?lang=' + lang
         const obs$ = this.http.get(url, { headers: header }).pipe(
             switchMap((result) => {
                 /*result
@@ -84,15 +84,15 @@ export class CustomLoader implements TranslateLoader {
            "name": "my name",
            "count": 2
         }*/
-                console.log('result', result);
+                console.log('result', result)
                 const flattenObj = (obj: any, objToAdd: { [x: string]: any }) => {
                     Object.entries(obj).map(([key, value]) => {
-                        objToAdd[key] = '' + value;
-                    });
-                };
-                let objFrFlat = {};
-                flattenObj(result, objFrFlat);
-                console.log('objFrFlat', objFrFlat);
+                        objToAdd[key] = '' + value
+                    })
+                }
+                let objFrFlat = {}
+                flattenObj(result, objFrFlat)
+                console.log('objFrFlat', objFrFlat)
 
                 /*objFrFlat
         {
@@ -100,59 +100,59 @@ export class CustomLoader implements TranslateLoader {
            "name": "my name",
            "count": "2"
         } */
-                return of(objFrFlat);
+                return of(objFrFlat)
             }),
             catchError((_) => {
-                console.log(_);
-                let result = {};
+                console.log(_)
+                let result = {}
                 if (lang == 'en') {
                     result = {
                         label: 'my label when error in backend',
-                    };
+                    }
                 } else {
                     result = {
                         label: 'mon label quand erreur en backend',
-                    };
+                    }
                 }
-                return of(result);
+                return of(result)
             }),
             retry(1),
             finalize(() => {
-                console.log('obs$ done!');
+                console.log('obs$ done!')
             })
-        );
+        )
 
         const obs2$ = this.http.get(`${this.assets_folder}/${lang}${this.suffix}`).pipe(
             switchMap((responses) => {
-                return of(responses);
+                return of(responses)
             }),
             catchError((error) => {
-                console.log(error);
-                return of('no more requests!!!');
+                console.log(error)
+                return of('no more requests!!!')
             }),
             finalize(() => {
-                console.log('obs2$ done!');
+                console.log('obs2$ done!')
             })
-        );
+        )
 
         return forkJoin([obs$, obs2$]).pipe(
             switchMap((responses) => {
-                const result = Object.assign({}, responses[0], responses[1]);
-                return of(result);
+                const result = Object.assign({}, responses[0], responses[1])
+                return of(result)
             })
-        );
+        )
     }
 }
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
-    return new TranslateHttpLoader(httpClient);
+    return new TranslateHttpLoader(httpClient)
 }
 
 // load config
 const initAppFn = (envService: EnvironmentLoaderService) => {
-    return () => envService.loadEnvConfig();
-};
+    return () => envService.loadEnvConfig()
+}
 
 @NgModule({
     declarations: [AppComponent, Layout],
@@ -219,6 +219,6 @@ export class AppModule {
             faStackOverflow,
             faGithub,
             faMedium
-        );
+        )
     }
 }
