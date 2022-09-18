@@ -121,57 +121,26 @@ This will run prettier to format staged files and those files will be re-staged 
 
 The above command will create a .husky folder in the root. And further, it is going to run the mentioned hook ( we are using pre-commit).
 
+> into .husky/pre-commit
+
 ```
  #!/usr/bin/env sh
  . "$(dirname -- "$0")/_/husky.sh"
 
- npm test
+ #npm test
  npm run pretty-quick
 ```
 
 > i commented out the npm test
 
+> npx husky add .husky/pre-commit "npm run pretty-quick"
+> into .husky/pre-push
+
+```
+ #!/usr/bin/env sh
+ . "$(dirname -- "$0")/_/husky.sh"
+
+ npm test
+```
+
 ---
-
-package.json/script:
-add an npm script that will run prettier with the --check flag
-"prettier:check": "prettier --config .prettierrc --check \"src/\*_/_.{ts,css,scss,html}\""
-
-Setting up git hooks in package.json:
-add pre-commit hook:
-"husky": {  
- "hooks": {  
- "pre-commit": "npm run prettier:check"  
- }  
- }
-At this point we can try to commit the package json
-git add .
-git commit -m "add prettier and husky"
-We may have an error related to the that:
-the files in the src directory were not formatted
-
-Running git hooks only on staged files using lint-staged:
-"lint-staged": {
-"src/\*_/_.{ts,css,scss,html}": [
-"npm run prettier:check"
-]
-},
-"husky": {
-"hooks": {
-"pre-commit": "lint-staged"  
- }
-}
-
-Running tests on pre-push git hook
-
-"lint-staged": {
-"src/\*_/_.{ts,css,scss,html}": [
-"npm run prettier:check"
-]
-},
-"husky": {
-"hooks": {
-"pre-commit": "lint-staged",
-"pre-push": "npm run test"  
- }
-},
