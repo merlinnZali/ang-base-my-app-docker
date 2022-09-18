@@ -1,3 +1,10 @@
+[tektutorialshub.com/angular-tutorial/](https://www.tektutorialshub.com/angular-tutorial/)
+
+Interpolation
+Property Binding
+Event Binding
+Two-way Binding/Model Binding
+
 # MyAppDocker
 
 > AppComponent.ts
@@ -34,11 +41,184 @@ Custom loader for using also backend data for translation
 -   Bootstrap-icons
 -   ngx-bootstrap-icons: npm i ngx-bootstrap-icons --save
 
-# Http
+# Http - Interceptors
 
 -   ok
 
-# RxJS
+# Directives
+
+-   Structure:
+
+    -   ngFor
+    -   ngSwitch
+    -   ngIf
+
+-   Attribute:
+
+    -   ngClass
+    -   ngStyle
+    -   ngModel
+
+-   Custom directive
+
+```
+import { Directive, ElementRef, Input, OnInit } from '@angular/core'
+
+@Directive({
+  selector: '[ttClass]',
+})
+export class ttClassDirective implements OnInit {
+
+  @Input() ttClass: string;
+
+  constructor(private el: ElementRef) {
+  }
+
+  ngOnInit() {
+    this.el.nativeElement.classList.add(this.ttClass);
+  }
+
+}
+
+app.component.css :
+.blue {
+  background-color: lightblue;
+}
+
+Finally:
+<button [ttClass]="'blue'">Click Me</button>
+
+```
+
+```
+import { Directive, ElementRef, Renderer2, Input, HostListener, HostBinding } from '@angular/core'
+
+@Directive({
+  selector: '[ttToggle]',
+})
+export class ttToggleDirective {
+
+  private elementSelected = false;
+
+  constructor(private el: ElementRef) {
+  }
+
+  ngOnInit() {
+  }
+
+  @HostListener('click')
+  private onClick() {
+    this.elementSelected = !this.elementSelected;
+    if (this.elementSelected) {
+      this.el.nativeElement.classList.add('toggle')
+    } else {
+      this.el.nativeElement.classList.remove('toggle')
+    }
+  }
+
+}
+```
+
+# pipes
+
+-   [pipe-link](https://angular.io/api?query=pipe)
+
+> custom:
+
+```
+import {Pipe, PipeTransform} from '@angular/core';
+
+@pipe({
+    name: 'tempConverter'
+})
+export class TempConverterPipe implements PipeTransform {
+    transform(value: number, unit: string) {
+        if(value && !isNaN(value)) {
+            if (unit === 'C') {
+                var temperature = (value - 32) /1.8 ;
+                return temperature.toFixed(2);
+            } else if (unit === 'F'){
+                var temperature = (value * 1.8 ) + 32
+                return temperature.toFixed(2);
+            }
+        }
+        return;
+    }
+}
+```
+
+> use it: Fahrenheit : {{celcius | tempConverter:'F'}}
+
+> use it into component:
+
+```
+  constructor(private tempConverterPipe:TempConverterPipe) {
+  }
+this.result = this.tempConverterPipe.transform(value, unit);
+```
+
+> Async Pipe
+
+> KeyValue Pipe + comparator
+
+```
+obj = [
+    { key:a, value:789 },
+    { key:b, value:446 },
+    { key:c, value:123 },
+  ];
+
+orderbyValueDsc = (a: KeyValue<number,string>, b: KeyValue<number,string>): number => {
+  return a.value > b.value ? 1 : (a.value > b.value) ? 0 : -1
+}
+
+<ul>
+  <li *ngFor="let item of obj | keyvalue : orderbyValueDsc ">
+    {{item.key}} ---> {{item.value}}</li>
+</ul>
+
+//Output
+c ---> 123
+b ---> 456
+a ---> 789
+```
+
+```
+ breeds=
+    {
+      "corgi": ["cardigan"],
+      "bulldog": ["boston", "english", "french"],
+      "hound": ["afghan", "basset", "blood", "english", "ibizan", "plott", "walker"],
+    }
+
+ orderClause = (a: KeyValue<number,[string]>, b: KeyValue<number,[string]>): number => {
+    return a.value.length > b.value.length ? -1 : (a.value.length > b.value.length) ? 0 : 1
+  }
+
+<ul>
+  <li *ngFor="let item of breeds | keyvalue : orderClause ">
+    {{item.key}} ---> {{item.value}}</li>
+</ul>
+
+//Output:
+hound ---> afghan,basset,blood,english,ibizan,plott,walker
+bulldog ---> boston,english,french
+corgi ---> cardigan
+
+
+```
+
+# Service
+
+-   ok
+
+# Injections
+
+# modules
+
+-   ok
+
+# router - guard
 
 -   ok
 
