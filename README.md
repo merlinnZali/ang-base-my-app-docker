@@ -39,7 +39,7 @@ Custom loader for using also backend data for translation
 
 # RxJS
 
--   wip
+-   ok
 
 # Form
 
