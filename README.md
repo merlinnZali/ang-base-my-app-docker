@@ -194,7 +194,6 @@ ou
 
  #npm test
  npm run pretty-quick
-
  # no stash and quiet mode
  npx lint-staged --no-stash -q
 ```
