@@ -3,6 +3,7 @@ import { EnvConfig } from './core/config/env-config'
 import { EnvironmentLoaderService } from './core/config/environment-loader.service'
 import { DefaultLangChangeEvent, LangChangeEvent, TranslateService, TranslationChangeEvent } from '@ngx-translate/core'
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal'
+import { LoggerService } from './core/config/logger-service'
 
 @Component({
     selector: 'app-root',
@@ -29,13 +30,17 @@ export class AppComponent implements OnInit {
     constructor(
         private readonly envService: EnvironmentLoaderService,
         public translate: TranslateService,
-        private modalService: BsModalService
+        private modalService: BsModalService,
+        private loggerService: LoggerService
     ) {
         let theme = Theme.GREEN
         document.body.classList.add(theme)
     }
 
     ngOnInit(): void {
+        this.loggerService.log('Test logging ...')
+        this.loggerService.debug('Test debugging ...')
+
         this.envConfig = this.envService.get()
 
         //init language

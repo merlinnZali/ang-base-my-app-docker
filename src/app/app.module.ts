@@ -46,6 +46,12 @@ registerLocaleData(localeEn, 'en')
 import { Layout } from './layout/layout'
 import { AppComponent } from './app.component'
 
+import { LogFormatter } from './core/config/log-formatter'
+import { LogDefaultFormatter } from './core/config/log-default-formatter'
+import { LogAppender } from './core/config/log-appender'
+import { LogConsoleAppender } from './core/config/log.console.appender'
+import { LoggerConfig } from './core/config/logger-config'
+
 import {
     delay,
     take,
@@ -205,6 +211,11 @@ const initAppFn = (envService: EnvironmentLoaderService) => {
         // also align apache or nginx basePath
         // like: /var/www/amtnet19/my-app-docker
         { provide: APP_BASE_HREF, useValue: '/my-app-docker' },
+
+        //log stuff
+        { provide: LogFormatter, useClass: LogDefaultFormatter },
+        { provide: LogAppender, useClass: LogConsoleAppender },
+        { provide: LoggerConfig, useValue: { enableDebug: true } },
     ],
     bootstrap: [AppComponent],
 })
