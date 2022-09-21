@@ -6,8 +6,8 @@ RUN npm install --silent
 
 #copy the react app to the container, excluding the node folder
 COPY . .
-ARG REACT_APP_NAME
-ENV REACT_APP_NAME=$REACT_APP_NAME
+ARG MY_APP_NAME
+ENV MY_APP_NAME=$MY_APP_NAME
 
 # #prepare the contiainer for building react 
 #RUN npm install react-scripts@3.0.1 -g --silent 
@@ -26,6 +26,6 @@ COPY nginx/nginx.conf /etc/nginx/conf.d
 # EXPOSE 80 
 # CMD ["nginx","-g","daemon off;"]
 
-#docker build -t myapp-prod:v1.0.0 -f Dockerfile.prod .
-#docker run -d -p 8080:80 -e REACT_APP_NAME=myapp-prod --name react-app-prod myapp-prod:v1.0.0
+#docker build -t dockerHubUsername/myapp-prod:v1.0.0 -f Dockerfile.prod .
+#docker run -d -p 8080:80 -e MY_APP_NAME=myapp-prod --name react-app-prod myapp-prod:v1.0.0
 #docker exec -it react-app-prod sh

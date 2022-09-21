@@ -1,0 +1,77 @@
+ElementREf:
+
+ElemenRef est un wrapper autour d’un objet d’élément DOM natif qui contient la propriété nativeElement. Il contient la référence à l’élément DOM et nous pouvons l’utiliser pour manipuler le DOM. Il est utilisé avec ViewChild pour obtenir l’élément HTML de la classe du composant.
+
+
+# angular
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+
+@Component({
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent implements AfterViewInit {
+  @ViewChild('ElementRefDiv') ElementView: ElementRef;
+
+  ngAfterViewInit() {
+    console.log(this.ElementView);
+    this.ElementView.nativeElement.innerHTML = 'Hello I am Using ElementRef To Display this!';
+  }
+}
+
+# angular
+<div #ElementRefDiv></div>
+
+NP:
+Note: ElementRef allows direct access to the DOM which could risk your app to XSS attacks. There are other alternatives (templating, data binding and also the Renderer2 API) to directly access the DOM which will cover in other tutorials.
+
+Using ElementRef with Directive Example:
+
+ng generate directive makered and update it as follows:
+
+import { Directive, ElementRef, OnInit } from '@angular/core';
+
+@Directive({
+  selector: '[appMakered]',
+})
+export class MakeredDirective {
+  constructor(
+    private elementRef: ElementRef
+  ) { }
+
+  ngOnInit() {
+    this.elementRef.nativeElement.style.backgroundColor = 'red';
+  }
+
+}
+
+in a html:
+
+<h1>Angular 10 ElementRef with Directive Example</h1>
+<div appMakered>
+  Add the <code>appMakered</code> attribute to change the background color to red.
+</div>
+
+
+Accessing the DOM with Renderer2, ElementRef and Angular Directives:
+
+import { Directive, ElementRef, Renderer2 } from '@angular/core';
+
+@Directive({
+  selector: '[appMakered]',
+})
+export class MakeredDirective {
+
+  constructor(private elementRef: ElementRef, private renderer: Renderer2) {
+      this.renderer.setStyle(this.elementRef.nativeElement, 'background-color', 'red');
+  }
+}
+
+
+
+
+
+
+
+

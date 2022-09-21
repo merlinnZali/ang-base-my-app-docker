@@ -2,7 +2,7 @@ echo "Switching to master branch"
 # git checkout master
 
 echo "Building app..."
-# npm run build
+npm run build
 
 echo "Deploying files to server"
 # we should have both private key and passwd link to the public key present in server
