@@ -1,13 +1,225 @@
-[tektutorialshub.com/angular-tutorial/](https://www.tektutorialshub.com/angular-tutorial/)
+# DOCS
 
-Interpolation
-Property Binding
-Event Binding
-Two-way Binding/Model Binding
+> [tektutorialshub.com/angular-tutorial/](https://www.tektutorialshub.com/angular-tutorial/)
+
+> [angular-component-communication-sharing-data/](https://www.tektutorialshub.com/angular/angular-component-communication-sharing-data/)
+
+> [select-options-example-in-angular/](https://www.tektutorialshub.com/angular/select-options-example-in-angular/)
+
+> [replaysubject-behaviorsubject-asyncsubject/](https://www.tektutorialshub.com/angular/replaysubject-behaviorsubject-asyncsubject-in-angular/)
+
+> [angular-reactive-forms/](https://www.tektutorialshub.com/angular/angular-reactive-forms/)
+
+-   <b>Interpolation</b>: {{property}}
+
+-   <b>Property Binding</b>: [value]="property"
+
+-   <b>Event Binding</b>: (click)="property = something ou function"
+
+-   <b>Two-way Binding</b>: [(size)]="property"
+
+    ```
+    <input type="text" [value]="name" (input)="name=$event.target.value">
+    <p> You entered {{name}}</p>
+    <button (click)="clearName()">Clear</button>
+    ```
+
+-   <b>NG-Model Binding</b>:
+
+    ```
+    <input type="text" name="value" ngModel (ngModelChange)="valueChanged($event)">
+    <input type="text" name="value" [(ngModel)]="value">
+
+    <p>Name: <input type="text" name="customer.name" [(ngModel)]="customer.name"></p>
+    ```
+
+-   <b>NG-Model Binding <span style="color: green;">CUSTOM</span></b>:
+
+    ```
+    // In the parent view:
+    <childComponent [(count)]="count"></childComponent>
+    <p> Current Count {{count}}</p>
+    <button (click)="clearCount()">Clear</button>
+
+    // ChildComponent
+    <p>
+      Count: {{ count }}
+      <button (click)="increment()">Increment</button>
+    </p>
+    class ChildComponent{
+      @Input count = 0;
+      // the implicit event-word should end with Change
+      @output countChange: EventEmitter<number> = new EventEmitter<number>();
+
+      increment() {
+        this.count++;
+        this.countChange.emit(this.count);
+      }
+    }
+    ```
+
+-   <b>Input-Output</b>:
+
+    -   [childProp@Input]="parentProp"
+    -   (childEventEmitter@output) ="parentMethod($event)".
+
+    ```
+    @Input('customName') childProp;
+    @output childEventEmitter: EventEmitter<any> = new EventEmitter<any>();
+
+    // Intercept input property changes with a setter
+    private _customName = '';
+    @Input()
+    set customer(parentProp: Customer) {
+      //You can add some custom logic here
+      this._customerData = customer;
+      console.log(this._customerData)
+    }
+    get customer(): string { return this._customerData; }
+    ```
+
+-   <b>LocalVariable</b>:
+    ```
+     <h2>{{tag.name}}</h2>
+     <childComponent #tag></childComponent>
+     <b>Welcome {{lastName.value}} </b>
+     <input (keyup)="0" type="text" #lastName id="lastName">
+    ```
+
+# View communication Stuff
+
+-   > <b>ElemenRef</b>: any html with tagName
+    > `<div #ElementRefDiv></div>`
+
+-   > <b>TemplateRef</b>: (ng-template) with tagName or and var like (let-name or let-wellDone=true): use to instantiate a component or to be used into the template
+
+    ```
+    <ng-template #tpl>
+      <span>I am span in template</span>
+    </ng-template>
+    ```
+
+-   > <b>ViewRef</b>
+
+-   > <b>ViewContainerRef</b>: container where one or more view can be attached
+    > has createEmbededView(TemplateRef) or createComponent(ComponentFactoryResolver ... ComponentRef)
+
+-   > <b>ComponentRef</b>
+
+-   > <b>ng-container-ngComponentOutlet</b>:
+
+    ```
+    <div *ngIf="details">
+      <div *ngFor="let info of details">
+          {{ info.content }}
+      </div>
+    </div>
+
+    // replace the undesired div with ng-container
+    <ng-container *ngIf="details">
+      <div *ngFor="let info of details">
+        {{ info.content }}
+      </div>
+    </ng-container>
+
+    // ngComponentOutlet
+    <ng-container *ngComponentOutlet="ColorComponentOrTemplate"></ng-container>
+    ```
+
+-   > <b>ng-content</b>: is used to project content into Angular components
+
+    ```
+    // in child:
+    <h1>Child Info</h1>
+    <ng-content select="[input], [form-field]"></ng-content>
+
+    // in parent:
+    <app-child>
+      <h1 input>Content1!</h3>
+      <h2 form-field>Content2!</h2>
+      <h3 input form-field>Content1 & Content2!</h1> <------ the used one
+    </app-child>
+    ```
+
+-   > <b>ViewChild</b>: Any component, directive, or element which is part of a template is ViewChild and any component or element which is projected in the template is ContentChild
+
+    ```
+    // child: selector app-view-child
+    <div #header>
+      <ng-content></ng-content> [ContentChild] <- the h4 and app-message(MessageComponent) both ll be here
+    </div>
+
+    // parent:
+    <app-view-child>
+     <h4 #content></h4>  [ViewChild as ElemenRef]
+     <app-message [message]="message"></app-message> [ViewChild as ComponentRef]
+     //ou
+     <app-message *ngFor="let f of messages" [message]='f'></app-message>
+    </app-view-child>
+
+    @ViewChild(MessageComponent) messageViewChild: MessageComponent;
+    // ou
+    @ViewChildren(MessageComponent) messageViewChildren: QueryList<MessageComponent>;
+
+    constructor(private cd: ChangeDetectorRef) {}
+
+    ngAfterViewInit() {
+      console.log(this.messageViewChild);
+      this.messageViewChild.message = 'Passed as View Child';
+      // ou
+      console.log(this.messageViewChildren);
+      this.messageViewChildren.forEach((item) => { item.message = 'Infragistics';
+
+      // the value will change but the console will show an error
+      // error: Expression has changed after it was last checked
+      This error can be fixed two ways,
+        - By changing the ViewChild property in ngAfterContentInit life cycle hook
+        - Manually calling change detection using ChangeDetectorRef
+
+      solution 1:
+      this.cd.detectChanges();
+    }
+    solution 2:
+    ngAfterContentInit() {
+      this.messageViewChild.message = 'Passed as View Child';
+      //ou
+      this.messageViewChildren.forEach((item) => { item.message = 'Infragistics';
+    }
+    ngOnInit() {
+      this.message = 'Hello World !';
+    }
+    ```
+
+-   > <b>ContentChild</b>: Any component, directive, or element which is part of a template is ViewChild and any component or element which is projected in the template is ContentChild
+
+    ```
+    // child: selector app-view-child
+    <div #header>
+      <ng-content select="app-message"></ng-content> [ContentChild] <- only app-message(MessageComponent) ll be here
+    </div>
+
+    @ContentChild(MessageComponent) MessageComponnetContentChild: MessageComponent;
+    // ou
+    @ContentChildren(MessageComponent) MessageComponnetContentChild: QueryList<MessageComponent>;
+
+    ngAfterContentInit() {
+      console.log(this.MessageComponnetContentChild);
+      // in case of ContentChildren
+      this.MessageComponnetContentChild.forEach((m) => m.message = 'Foo');
+    }
+
+    // parent:
+    <app-view-child>
+     <h4 #content></h4>  [ViewChild as ElemenRef]
+     <app-message [message]="message"></app-message> [ViewChild as ComponentRef]
+     // ou
+     <app-message *ngFor='let m of messages' [message]='m'></app-message>
+    </app-view-child>
+    ```
 
 # MyAppDocker
 
-> AppComponent.ts
+> <b>AppComponent.ts</b>
 
 ```
 change the theme value in order to see the theme changing
@@ -26,7 +238,7 @@ see assets/fonts and styles.scss
 > npm i @ngx-translate/core
 > npm i @ngx-translate/http-loader
 
-The plural
+<b>The plural</b>
 
 > npm install ngx-translate-messageformat-compiler messageformat
 
@@ -34,12 +246,14 @@ Custom loader for using also backend data for translation
 
 # Bootstrap
 
--   ngBootstrap
--   ngx-bootstrap: better, "https://valor-software.com/ngx-bootstrap/#/documentation#getting-started"
--   fontAwesome
--   ngSelect
--   Bootstrap-icons
--   ngx-bootstrap-icons: npm i ngx-bootstrap-icons --save
+-   <b>ngBootstrap</b>
+-   <b>ngx-bootstrap</b>:
+    -   better than ngBootstrap
+    -   https://valor-software.com/ngx-bootstrap/#/documentation#getting-started
+-   <b>fontAwesome</b>
+-   <b>ngSelect</b>
+-   <b>Bootstrap-icons</b>
+-   <b>ngx-bootstrap-icons</b>: npm i ngx-bootstrap-icons --save
 
 # Http - Interceptors
 
@@ -47,19 +261,19 @@ Custom loader for using also backend data for translation
 
 # Directives
 
--   Structure:
+-   <b>Structure</b>:
 
     -   ngFor
     -   ngSwitch
     -   ngIf
 
--   Attribute:
+-   <b>Attribute</b>:
 
     -   ngClass
     -   ngStyle
     -   ngModel
 
--   Custom directive
+-   <b>Custom directive</b>:
 
 ```
 import { Directive, ElementRef, Input, OnInit } from '@angular/core'
@@ -123,7 +337,7 @@ export class ttToggleDirective {
 
 -   [pipe-link](https://angular.io/api?query=pipe)
 
-> custom:
+> <b>Custom</b>:
 
 ```
 import {Pipe, PipeTransform} from '@angular/core';
@@ -147,7 +361,7 @@ export class TempConverterPipe implements PipeTransform {
 }
 ```
 
-> use it: Fahrenheit : {{celcius | tempConverter:'F'}}
+> use it: Fahrenheit : {{ celcius | tempConverter:'F' }}
 
 > use it into component:
 
@@ -157,9 +371,9 @@ export class TempConverterPipe implements PipeTransform {
 this.result = this.tempConverterPipe.transform(value, unit);
 ```
 
-> Async Pipe
+> <b>Async Pipe</b>: {{ value |lowercase | async }}
 
-> KeyValue Pipe + comparator
+> <b>KeyValue Pipe + comparator</b>
 
 ```
 obj = [
@@ -326,7 +540,7 @@ pending
 }
 ```
 
-add .prettierignore
+add <b>.prettierignore</b>
 
 ```
  package.json
@@ -339,7 +553,7 @@ Prettier takes care of the formatting whereas tslint takes care of all the other
 
 > npm install --save-dev tslint-config-prettier
 
-.tslint.json:
+<b>.tslint.json</b>:
 
 ```
   {
