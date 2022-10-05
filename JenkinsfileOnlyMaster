@@ -62,10 +62,10 @@ node(){
         '''
         //sh "mv -R ./dist/* . && rm -R ./dist"
         echo 'Copy completed'
+
+        // For that we need to use the APP_BASE_HREF or DEPLOY_URL
+        // APP_BASE_HREF => /my-app-docker/
+
+        // Also change the appache or nginx base/root path to /var/www/merlino/my-app-docker
     }
 }
-
-// For that we need to use the APP_BASE_HREF or DEPLOY_URL
-// APP_BASE_HREF => /my-app-docker/
-
-// Also change the appache or nginx base/root path to /var/www/merlino/my-app-docker/
