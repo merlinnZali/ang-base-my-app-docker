@@ -31,7 +31,9 @@ pipeline {
             
         stage('Install dependencies') {
             steps {
-                rm ./package-lock.json
+                script {
+                    rm ./package-lock.json
+                }
                 sh 'npm install'
                 echo "Modules installed"
             }
