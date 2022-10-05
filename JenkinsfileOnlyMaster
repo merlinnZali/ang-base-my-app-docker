@@ -14,8 +14,10 @@ node(){
         
     stage('Run Tests') {
         nodejs('nodejs') {
-            // \./node_modules/@angular/cli/bin/ng test --progress false --single-run=true --watch=false
-            // \./node_modules/@angular/cli/bin/ng e2e --progress false --watch=false
+            /*
+            ./node_modules/@angular/cli/bin/ng test --progress false --single-run=true --watch=false
+            ./node_modules/@angular/cli/bin/ng e2e --progress false --watch=false
+            */
             echo "Tests OK"
         }
         
@@ -55,7 +57,11 @@ node(){
         echo 'Copy'
         // will copy then unzip, result => /var/www/merlino/dist/my-app-docker/code+index file
         //sh "yes | sudo cp -R bundle.tar.gz /var/www/html && cd /var/www/html && sudo tar -xvf bundle.tar.gz"
-        sh "yes | sudo cp -R bundle.tar.gz /var/www/merlino && cd /var/www/merlino && sudo tar -xvf bundle.tar.gz"
+        sh '''
+        yes | sudo cp -R bundle.tar.gz /var/www/merlino && cd /var/www/merlino && sudo tar -xvf bundle.tar.gz
+        # Copy the bundle.tar.gz into /var/www/merlino and changing the directory to /var/www/merlino
+        ls -l
+        '''
         //sh "mv -R ./dist/* . && rm -R ./dist"
         echo 'Copy completed'
     }
