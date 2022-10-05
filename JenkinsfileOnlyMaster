@@ -6,9 +6,6 @@ pipeline {
     tools { 
         nodejs 'nodejs-16.16.0' 
     }
-    parameters{
-
-    }
     options {
         timestamps()
         //ansiColor("xterm")
@@ -26,7 +23,7 @@ pipeline {
         }
             
         stage('Install dependencies') {
-            nodejs('nodejs-16.16.0') {
+            steps {
                 rm ./package-lock.json
                 sh 'npm install'
                 echo "Modules installed"
@@ -34,8 +31,17 @@ pipeline {
             
         }
 
+        stage('Tests') {
+            steps {
+                echo "Test skipped"
+            }
+            
+        }
+
         stage('Build') {
             steps {
+                // could depend on the selectedEnv
+                // sh 'npm run build --configuration selectedEnv'
                 sh 'npm run build --prod'
                 echo "Build completed"
             }
@@ -59,7 +65,9 @@ pipeline {
         }
 
         stage('Stash changes') {
-            stash allowEmpty: true, includes: 'bundle.tar.gz', name: 'buildArtifacts'
+            steps {
+                stash allowEmpty: true, includes: 'bundle.tar.gz', name: 'buildArtifacts'
+            }
         }
 
         stage('Deploy') {
