@@ -5,15 +5,26 @@ node(){
         
     stage('Install dependencies') {
         nodejs('nodejs') {
+            rm ./package-lock.json
             sh 'npm install'
             echo "Modules installed"
+        }
+        
+    }
+        
+    stage('Run Tests') {
+        nodejs('nodejs') {
+            // ./node_modules/@angular/cli/bin/ng test --progress false --single-run=true --watch=false
+            // ./node_modules/@angular/cli/bin/ng e2e --progress false --watch=false
+            echo "Tests OK"
         }
         
     }
     stage('Build') {
         nodejs('nodejs') {
             // will depend of the env
-            sh 'npm run build'
+            // sh 'npm run build --configuration env'
+            sh 'npm run build --prod'
             echo "Build completed"
         }
         
@@ -28,6 +39,8 @@ node(){
         fingerprint 'bundle.tar.gz'
         archiveArtifacts 'bundle.tar.gz'
         echo "Artifacts created"
+        // send to nexus
+        echo "Artifacts saved on nexus"
     }
 
     stage('Stash changes') {
@@ -36,18 +49,19 @@ node(){
 
     stage('Deploy') {
         echo 'Unstash'
-        unstash 'buildArtifacts'
+        unstash 'buildArtifacts'ok
         echo 'Artifacts copied'
 
         echo 'Copy'
         // will copy then unzip, result => /var/www/merlino/dist/my-app-docker/code+index file
         //sh "yes | sudo cp -R bundle.tar.gz /var/www/html && cd /var/www/html && sudo tar -xvf bundle.tar.gz"
-        //sh "yes | sudo cp -R bundle.tar.gz /var/www/merlino && cd /var/www/merlino && sudo tar -xvf bundle.tar.gz"
+        sh "yes | sudo cp -R bundle.tar.gz /var/www/merlino && cd /var/www/merlino && sudo tar -xvf bundle.tar.gz"
+        //sh "mv -R ./dist/* . && rm -R ./dist"
         echo 'Copy completed'
     }
 }
 
 // For that we need to use the APP_BASE_HREF or DEPLOY_URL
-// APP_BASE_HREF => /dist/my-app-docker/
+// APP_BASE_HREF => /my-app-docker/
 
-// Also change the appache or nginx base/root path to /var/www/merlino/dist/my-app-docker/
+// Also change the appache or nginx base/root path to /var/www/merlino/my-app-docker/

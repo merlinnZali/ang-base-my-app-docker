@@ -428,6 +428,8 @@ corgi ---> cardigan
 
 # Injections
 
+-   wip
+
 # modules
 
 -   ok
@@ -655,7 +657,7 @@ ou
 
 # ngRX Store
 
-...
+-   OK
 
 # Angular Table
 
