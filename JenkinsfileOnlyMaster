@@ -44,7 +44,7 @@ pipeline {
 
         stage('Package Build') {
             steps {
-                tar -zcvf bundle.tar.gz dist/my-app-docker/
+                tar -zcvf bundle.tar.gz dist/my-app-docker
             }
         }
 
