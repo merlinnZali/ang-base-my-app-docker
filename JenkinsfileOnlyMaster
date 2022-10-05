@@ -44,7 +44,6 @@ pipeline {
 
         stage('Package Build') {
             steps {
-                // zip create verbose file will zip the entire path/file not only the file
                 sh "tar -zcvf bundle.tar.gz dist/my-app-docker/"
             }
         }
