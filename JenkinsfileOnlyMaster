@@ -12,16 +12,17 @@ node(){
         
     }
         
+    /*
     stage('Run Tests') {
-        nodejs('nodejs') {
-            /*
+            nodejs('nodejs') {
+
             ./node_modules/@angular/cli/bin/ng test --progress false --single-run=true --watch=false
             ./node_modules/@angular/cli/bin/ng e2e --progress false --watch=false
-            */
+           
             echo "Tests OK"
         }
         
-    }
+    } */
     stage('Build') {
         nodejs('nodejs') {
             // will depend of the env
