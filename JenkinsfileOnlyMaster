@@ -47,8 +47,6 @@ pipeline {
 
         stage('Build') {
             steps {
-                // could depend on the selectedEnv
-                // sh 'npm run build --configuration selectedEnv'
                 sh 'npm run build --prod'
                 echo "Build completed"
             }
