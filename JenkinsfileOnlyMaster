@@ -16,8 +16,8 @@ node(){
     stage('Run Tests') {
             nodejs('nodejs') {
 
-            ng test --progress false --single-run=true --watch=false
-            ng e2e --progress false --watch=false
+            ng test --progress=false --watch=false
+            ng e2e --progress=false --watch=false
            
             echo "Tests OK"
         }
