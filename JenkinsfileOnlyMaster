@@ -49,7 +49,7 @@ node(){
 
     stage('Deploy') {
         echo 'Unstash'
-        unstash 'buildArtifacts'ok
+        unstash 'buildArtifacts'
         echo 'Artifacts copied'
 
         echo 'Copy'
