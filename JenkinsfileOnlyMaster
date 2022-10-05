@@ -11,13 +11,20 @@ pipeline {
         //ansiColor("xterm")
     }
     stages {
-        stage('Cloning Git') {
+        stage('check env') {
             steps {
                 sh '''
+                    env | grep -e PATH -E JAVA_HOME
+                    which java
+                    java -version
                     echo "PATH = ${PATH}"
                     echo "JAVA = ${JAVA_HOME}"
                     echo "M2_HOME = ${M2_HOME}"
-                ''' 
+                '''
+            }
+        }
+        stage('Cloning Git') {
+            steps {
                 checkout scm
             }
         }
