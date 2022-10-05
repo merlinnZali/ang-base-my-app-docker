@@ -4,14 +4,14 @@ node(){
     }
         
     stage('Install dependencies') {
-        nodejs('nodejs') {
+        nodejs('nodejs-16.16.0') {
             sh 'npm install'
             echo "Modules installed"
         }
         
     }
     stage('Build') {
-        nodejs('nodejs') {
+        nodejs('nodejs-16.16.0') {
             sh 'npm run build'
             echo "Build completed"
         }
