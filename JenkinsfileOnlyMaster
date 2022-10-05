@@ -14,11 +14,11 @@ pipeline {
         stage('check env') {
             steps {
                 sh '''
-                    env | grep -e PATH -E JAVA_HOME
+                    env | grep -e PATH -E java-17
                     which java
                     java -version
                     echo "PATH = ${PATH}"
-                    echo "JAVA = ${JAVA_HOME}"
+                    echo "JAVA = ${java-11}"
                     echo "M2_HOME = ${M2_HOME}"
                 '''
             }
