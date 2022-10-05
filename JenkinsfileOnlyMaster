@@ -1,53 +1,124 @@
-node(){
-    stage('Cloning Git') {
-        checkout scm
+
+
+pipeline {
+    //agent { label "any-executor" }
+    agent any
+    tools { 
+        nodejs 'nodejs-16.16.0' 
     }
-        
-    stage('Install dependencies') {
-        nodejs('nodejs') {
-            sh 'npm install'
-            echo "Modules installed"
+    options {
+        timestamps()
+        //ansiColor("xterm")
+    }
+    stages {
+        stage('check env') {
+            steps {
+                sh '''
+                    env
+                    env | grep -e PATH
+                    which java
+                    java -version
+                    echo "PATH = ${PATH}"
+                    echo "JAVA = ${JAVA_HOME}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
+            }
         }
-        
-    }
-    stage('Build') {
-        nodejs('nodejs') {
-            // will depend of the env
-            sh 'npm run build'
-            echo "Build completed"
+        stage('Cloning Git') {
+            steps {
+                checkout scm
+            }
         }
-        
+            
+        stage('Install dependencies') {
+            steps {
+                sh 'rm ./package-lock.json'
+                sh 'npm install'
+                echo "Modules installed"
+            }
+            
+        }
+
+        stage('Tests') {
+            steps {
+                echo "Test skipped"
+            }
+            
+        }
+
+        stage('Build') {
+            steps {
+                sh 'npm run build --prod'
+                echo "Build completed"
+            }
+            
+        }
+
+        stage('Package Build') {
+            steps {
+                // zip create verbose file will zip the entire path/file not only the file
+                sh 'tar -zcvf bundle.tar.gz dist/my-app-docker'
+            }
+        }
+
+        stage('Artifacts Creation') {
+            steps{
+                fingerprint 'bundle.tar.gz'
+                archiveArtifacts 'bundle.tar.gz'
+                echo "Artifacts created"
+                // send to nexus
+                echo "Artifacts saved on nexus"
+            }
+        }
+
+        stage('Stash changes') {
+            steps {
+                stash allowEmpty: true, includes: 'bundle.tar.gz', name: 'buildArtifacts'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Unstash'
+                unstash 'buildArtifacts'
+                echo 'Artifacts copied'
+
+                echo 'Copy'
+                // will copy then unzip, result => /var/www/merlino/dist/my-app-docker/code+index file
+                //sh "yes | sudo cp -R bundle.tar.gz /var/www/html && cd /var/www/html && sudo tar -xvf bundle.tar.gz"
+                sh '''
+                yes | sudo cp -R bundle.tar.gz /var/www/merlino && cd /var/www/merlino && sudo tar -xvf bundle.tar.gz
+                # Copy the bundle.tar.gz into /var/www/merlino and changing the directory to /var/www/merlino
+                ls -l
+                '''
+                //sh "mv -R ./dist/* . && rm -R ./dist"
+                echo 'Copy completed'
+
+                // For that we need to use the APP_BASE_HREF or DEPLOY_URL
+                // APP_BASE_HREF => /my-app-docker/
+
+                // Also change the appache or nginx base/root path to /var/www/merlino/my-app-docker
+            }
+        }
     }
-
-    stage('Package Build') {
-        // zip create verbose file will zip the entire path/file not only the file
-        sh "tar -zcvf bundle.tar.gz dist/my-app-docker/"
-    }
-
-    stage('Artifacts Creation') {
-        fingerprint 'bundle.tar.gz'
-        archiveArtifacts 'bundle.tar.gz'
-        echo "Artifacts created"
-    }
-
-    stage('Stash changes') {
-        stash allowEmpty: true, includes: 'bundle.tar.gz', name: 'buildArtifacts'
-    }
-
-    stage('Deploy') {
-        echo 'Unstash'
-        unstash 'buildArtifacts'
-        echo 'Artifacts copied'
-
-        echo 'Copy'
-        // will copy then unzip, result => /var/www/merlino/dist/my-app-docker/code+index file
-        //sh "yes | sudo cp -R bundle.tar.gz /var/www/html && cd /var/www/html && sudo tar -xvf bundle.tar.gz"
-        //sh "yes | sudo cp -R bundle.tar.gz /var/www/merlino && cd /var/www/merlino && sudo tar -xvf bundle.tar.gz"
-        echo 'Copy completed'
+    post {
+        always {
+            echo ''
+        }
+        success {
+            echo '----Succefully ended----'
+        }
+        failure {
+            echo '----Run failed----'
+        }
+        unstable {
+            echo '----Build is unstable----'
+        }
+        changed {
+            echo 'This will run only if the result change from one state to anorther one: eg [uninstable to succeful]'
+        }
+        aborted {
+            echo '----Has beenn aborted----'
+        }  
     }
 }
-
-// For that we need to use the APP_BASE_HREF or DEPLOY_URL
-// APP_BASE_HREF => /dist/my-app-docker/
-
-// Also change the appache or nginx base/root path to /var/www/merlino/dist/my-app-docker/

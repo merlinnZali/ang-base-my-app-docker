@@ -1,6 +1,11 @@
 echo "Switching to master branch"
 # git checkout master
 
+# rm ./package-lock.json
+# npm install
+# ./node_modules/@angular/cli/bin/ng test --progress false --single-run=true --watch=false
+# ./node_modules/@angular/cli/bin/ng e2e --progress false --watch=false
+
 echo "Building app..."
 npm run build
 

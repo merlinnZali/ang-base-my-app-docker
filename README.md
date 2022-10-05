@@ -428,6 +428,8 @@ corgi ---> cardigan
 
 # Injections
 
+-   wip
+
 # modules
 
 -   ok
@@ -655,17 +657,119 @@ ou
 
 # ngRX Store
 
-...
+-   OK
 
 # Angular Table
 
-...
+## primeNG
 
-# primeNG
+is a collection of rich UI components for Angular. All widgets are open source and free to use under MIT License.
 
-...
+-   PrimeNG Table -> [Link](https://www.primefaces.org/primeng/#/table)
 
-# graph
+> npm install primeng --save
+
+-   <b>Features</b>:
+    -   Filter
+    -   Paginator
+    -   Sorting
+    -   Dynamic Columns
+    -   Row Expansion
+    -   Style
+    -   Sections
+    -   Column Grouping
+    -   Row Grouping
+    -   Data Export
+        -Selection
+    -   Context Menu
+    -   Editing
+    -   Column Reordering
+    -   Scrolling
+    -   Lazy Loading
+    -   Responsive
+
+## ngx-datatable
+
+> Is an Angular component for presenting large and complex data.
+> It has all the features you would expect from any other datatable but in a light package with no external dependencies. The table was designed to be extremely flexible and light. it doesn’t make any assumptions about your data or how you: filter, sort or page it.
+
+go to [Link](https://swimlane.github.io/ngx-datatable/)
+
+> npm install @swimlane/ngx-datatable
+
+-   <b>Features</b>:
+    -   Handle large data sets ( Virtual DOM )
+    -   Expressive Header and Cell Templates
+    -   Horizontal & Vertical Scrolling
+    -   Column Reordering & Resizing
+    -   Client/Server side Pagination & Sorting
+    -   Intelligent Column Width Algorithms ( Force-fill & Flex-grow )
+    -   Integrated Pager
+    -   Cell & Row Selection ( Single, Multi, Keyboard, Checkbox )
+    -   Fixed AND Fluid height
+    -   Left and Right Column Pinning
+    -   Row Detail View
+    -   Inline Editing
+    -   Decoupled theme’ing with included Google
+    -   Material theme
+    -   Light codebase / No external dependencies
+    -   AoT Compilation Support
+    -   Universal Support
+
+## ag-Grid
+
+ag-Grid have two versions :
+
+-   Free Version
+-   Enterprise Version
+
+Free Version comes with limited features, but it comes with all the important features that are required for normal data-table.
+
+[Demo](https://www.ag-grid.com/angular-data-grid/getting-started/) / [Doc](https://www.ag-grid.com/angular-data-grid/)
+
+> npm install --save ag-grid-angular ag-grid
+
+-   <b>Features</b>:
+
+    -   Aligned Grids
+    -   Cell Editing
+    -   Column Filter, Column Groups, Column Moving, Column Pinning, Column Resizing
+    -   CSV Export
+    -   Quick Filter, Custom Filter, Date Filter
+    -   Keyboard Navigation
+    -   Pagination
+    -   Row Selection, Row Sorting, Row Dragging
+    -   Cell Rendering, Cell Style
+    -   Internationalisation
+    -   Overlays
+    -   Real-Time Updating Data
+
+-   <b>Addition features of ag-Grid for Enterprise version</b>:
+    -   Aggregation
+    -   Clipboard
+    -   Column Menu, Context Menu
+    -   Excel Export
+    -   Grouping Rows, Master/Detail
+    -   Pivoting, Range Selection
+    -   Status Bar, Tool Panel
+    -   Tree Data
+
+> Note : As per user review ag-Grid have performance issue’s in some cases, also it doesn’t look proper in some browser.
+
+## Angular Material Table
+
+> mat-table
+
+go to [Link](https://material.angular.io/components/table/overview)
+
+# chart
+
+-   ngx-charts: [link](https://swimlane.gitbook.io/ngx-charts/)
+    -   [How To Use Ngx-Charts In Angular Application](https://www.ngdevelop.tech/how-to-use-ngx-charts-in-angular/)
+-   ngx-echarts: [link](https://echarts.apache.org/en/index.html)
+-   ng2-charts: [link](https://www.npmjs.com/package/ng2-charts)
+-   angular-plotly.js
+-   PrimeNG Charts
 
 ...
 
