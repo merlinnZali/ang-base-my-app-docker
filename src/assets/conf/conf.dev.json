@@ -1,8 +1,7 @@
 {
     "apiUrl": "http://localhost:8081/api/v1/",
-    "version": "1.0",
-    "hello": "This was loaded from app-config.json",
+    "hello": "This was loaded from config.dev.json",
     "serverUrl": "http://localhost:8081/api/v1/",
-    "production": false,
-     "env": "dev"
+    "clientId": "clientId",
+    "isServed": true
 }

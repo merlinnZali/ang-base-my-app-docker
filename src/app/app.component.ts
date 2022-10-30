@@ -12,9 +12,11 @@ import { LoggerService } from './core/config/logger-service'
 })
 export class AppComponent implements OnInit {
     protected envConfig!: EnvConfig
-    modalRef?: BsModalRef
+    /*
     title = 'my-app-docker'
     param = { value: 'world' }
+
+    modalRef?: BsModalRef
     selectedGender = 'male'
     itemQuantity = '1'
 
@@ -26,11 +28,11 @@ export class AppComponent implements OnInit {
         { id: 3, name: 'Opel' },
         { id: 4, name: 'Audi' },
     ]
-
+*/
     constructor(
         private readonly envService: EnvironmentLoaderService,
         public translate: TranslateService,
-        private modalService: BsModalService,
+        //private modalService: BsModalService,
         private loggerService: LoggerService
     ) {
         let theme = Theme.GREEN
@@ -79,10 +81,10 @@ export class AppComponent implements OnInit {
             console.log('onDefaultLangChange', event)
         })
     }
-
+    /* 
     openModal(template: TemplateRef<any>) {
         this.modalRef = this.modalService.show(template)
-    }
+    } */
 }
 
 enum Theme {

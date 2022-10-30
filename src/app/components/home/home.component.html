@@ -1,8 +1,39 @@
-<router-outlet>
-    <app-home></app-home>
-</router-outlet>
-
-<!-- <div class="container text-center mt-5">
+<!--
+<h3>Pluralization</h3>
+<br />
+<h5>Select Items</h5>
+<div class="row">
+  <div class="col-md-4">
+    <select [(ngModel)]="itemQuantity" class="form-control" data-val="true">
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+    </select>
+  </div>
+  <div class="col-md-4">
+    <strong translate [translateParams]="{ count: itemQuantity }"
+      >pluralization.items</strong
+    >
+  </div>
+</div>
+<br />
+<h5>Select Gender</h5>
+<div class="row">
+  <div class="col-md-4">
+    <select [(ngModel)]="selectedGender" class="form-control" data-val="true">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="others">Others</option>
+    </select>
+  </div>
+  <div class="col-md-4">
+    <strong>{{
+      "pluralization.gender" | translate: { gender: selectedGender }
+    }}</strong>
+  </div>
+</div>
+-->
+<div class="container text-center mt-5">
     <div class="row">
         <ng-select [items]="cars" bindLabel="name" bindValue="id" placeholder="Select a car" [(ngModel)]="selectedCar">
         </ng-select>
@@ -21,7 +52,12 @@
                 <h1>Loading environment config</h1>
 
                 <p>This was loaded:</p>
-                <pre>{{ envConfig | json }}</pre>
+                <!-- <pre>{{ envConfig | json }}</pre> -->
+                <!-- <pre>{{ EnvironmentLoaderService._config | json }}</pre>-->
+
+                <ng-container *ngIf="config$ | async as config">
+                    <pre>{{ config | json }}</pre>
+                </ng-container>
             </div>
         </div>
 
@@ -190,4 +226,4 @@
 
         <br />
     </div>
-</div> -->
+</div>

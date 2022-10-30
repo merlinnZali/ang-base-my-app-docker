@@ -255,7 +255,7 @@ Custom loader for using also backend data for translation
 -   <b>Bootstrap-icons</b>
 -   <b>ngx-bootstrap-icons</b>: npm i ngx-bootstrap-icons --save
 
-# Http - Interceptors
+# HttpClient - Interceptors
 
 -   ok
 
@@ -774,3 +774,33 @@ go to [Link](https://material.angular.io/components/table/overview)
 ...
 
 # map
+
+# JSRX
+
+<table>
+<tr><th>AREA</th><th>OPERATORS</th></tr>
+<tr><td>Combination</td> <td>concat, merge, startWith , withLatestFrom, zip</td></tr>
+<tr>
+<td>Filtering	 </td> 
+<td>debounceTime,
+distinctUntilChanged, filter,
+take, takeUntil, takeWhile, takeLast, first, last, single, skip, skipUntil, skipWhile, skipLast,</td>
+</tr>
+<tr>
+<td>Transformation</td> 
+<td>bufferTime, concatMap, map, mergeMap, scan, switchMap, ExhaustMap, reduce</td>
+</tr>
+<tr><td>Utility	</td> <td>tap, delay, delaywhen</td></tr>
+<tr><td>Error Handling	</td> <td>throwerror, catcherror, retry, retrywhen</td></tr>
+<tr><td>Multicasting	</td> <td>share</td></tr>
+</table>
+
+[Angular Observable Tutorial](https://www.tektutorialshub.com/angular/angular-observable-tutorial-using-rxjs/)
+
+[Create observable from a string, array & object in angular](https://www.tektutorialshub.com/angular/rxjs-observable-using-create-of-from-in-angular/)
+
+[Create Observable from Event using FromEvent in Angular](https://www.tektutorialshub.com/angular/create-observable-from-event-using-fromevent-in-angular/)
+
+# DECORATOR
+
+[Angular Decorators](https://www.tektutorialshub.com/angular/angular-decorators/)

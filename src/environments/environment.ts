@@ -2,15 +2,15 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { APP_NAME, VERSION, Environment } from './environment.interface'
 
-import { APP_NAME, Environment } from "./environment.interface";
-
-export const environment : Environment = {
-  env: "local",
-  appName: APP_NAME,
-  assetsPath: '/assets',
-  configPath: '/assets/conf/conf.local.json'
-};
+export const environment: Environment = {
+    env: 'local',
+    appName: APP_NAME,
+    version: VERSION,
+    assetsPath: '/assets',
+    configPath: '/assets/conf/conf.local.json',
+}
 
 /*
  * For easier debugging in development mode, you can import the following file

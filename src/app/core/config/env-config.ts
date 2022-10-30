@@ -1,6 +1,7 @@
 export interface EnvConfig {
-    version: string;
-    serverUrl: string;
-    hello: string;
-    clientId: string;
+    apiUrl: string
+    serverUrl: string
+    hello: string
+    clientId: string
+    isServed: boolean
 }

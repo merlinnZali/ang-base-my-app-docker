@@ -65,6 +65,7 @@ import {
     interval,
     combineLatest,
 } from 'rxjs'
+import { HomeComponent } from './components/home/home.component'
 // retrieve the json from api instead of loading it locally
 export class CustomLoader implements TranslateLoader {
     suffix = '.json'
@@ -157,12 +158,16 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 }
 
 // load config
-const initAppFn = (envService: EnvironmentLoaderService) => {
+const initAppFn = (envService: EnvironmentLoaderService): (() => Promise<void>) => {
     return () => envService.loadEnvConfig()
 }
 
+const initAppFnWithObservable = (envService: EnvironmentLoaderService): (() => Observable<boolean>) => {
+    return () => envService.loadAppConfig$()
+}
+
 @NgModule({
-    declarations: [AppComponent, Layout],
+    declarations: [AppComponent, Layout, HomeComponent],
     imports: [
         BrowserModule,
         FormsModule,
@@ -200,7 +205,8 @@ const initAppFn = (envService: EnvironmentLoaderService) => {
         //EnvironmentLoaderService provided in root,
         {
             provide: APP_INITIALIZER,
-            useFactory: initAppFn,
+            //useFactory: initAppFn,
+            useFactory: initAppFnWithObservable,
             multi: true,
             deps: [EnvironmentLoaderService],
         },
