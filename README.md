@@ -528,7 +528,7 @@ pending
     ng build --prod --base-href /subfolder/ --deploy-url /subfolder/
 ```
 
-# Prettier lint husky
+# Prettier tslint husky
 
 > npm install prettier --save-dev
 > add: .prettierrc
@@ -631,28 +631,23 @@ git add .
 git commit -m "..."
 ```
 
-# Linting more (did not worked)
-
-> npm install --save-dev lint-staged
+# eSLint
 
 ```
-"lint-staged": {
-    "*.ts": "tslint *p ./tsconfig.json"
-}
-ou
-"lint-staged": {
-    "*.ts": "tslint"
-}
+With schematics:
+ - schematics:
+    ng add @angular-eslint/schematics
+
+ - Prettier:
+    npm i -D prettier-eslint eslint-config-prettier eslint-plugin-prettier
+
 ```
 
 ```
- #!/usr/bin/env sh
- . "$(dirname -- "$0")/_/husky.sh"
-
- #npm test
- npm run pretty-quick
- # no stash and quiet mode
- npx lint-staged --no-stash -q
+"lint": "ng lint",
+"lint-fix": "ng lint --fix",
+"pretty-quick-staged": "pretty-quick --staged",
+"pretty-quick": "pretty-quick",
 ```
 
 # ngRX Store
