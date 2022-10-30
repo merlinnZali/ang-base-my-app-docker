@@ -1,7 +1,7 @@
 {
-    "apiUrl": "mydomain.com",
-    "hello": "This was loaded from config.prod.json",
-    "serverUrl": "https://my-example-backend.server",
-    "clientId": "clientId",
-    "isServed": true
+  "apiUrl": "mydomain.com",
+  "hello": "This was loaded from config.prod.json",
+  "serverUrl": "https://my-example-backend.server",
+  "clientId": "clientId",
+  "isServed": true
 }

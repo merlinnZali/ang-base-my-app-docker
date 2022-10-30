@@ -10,212 +10,212 @@
 
 > [angular-reactive-forms/](https://www.tektutorialshub.com/angular/angular-reactive-forms/)
 
--   <b>Interpolation</b>: {{property}}
+- <b>Interpolation</b>: {{property}}
 
--   <b>Property Binding</b>: [value]="property"
+- <b>Property Binding</b>: [value]="property"
 
--   <b>Event Binding</b>: (click)="property = something ou function"
+- <b>Event Binding</b>: (click)="property = something ou function"
 
--   <b>Two-way Binding</b>: [(size)]="property"
+- <b>Two-way Binding</b>: [(size)]="property"
 
-    ```
-    <input type="text" [value]="name" (input)="name=$event.target.value">
-    <p> You entered {{name}}</p>
-    <button (click)="clearName()">Clear</button>
-    ```
+  ```
+  <input type="text" [value]="name" (input)="name=$event.target.value">
+  <p> You entered {{name}}</p>
+  <button (click)="clearName()">Clear</button>
+  ```
 
--   <b>NG-Model Binding</b>:
+- <b>NG-Model Binding</b>:
 
-    ```
-    <input type="text" name="value" ngModel (ngModelChange)="valueChanged($event)">
-    <input type="text" name="value" [(ngModel)]="value">
+  ```
+  <input type="text" name="value" ngModel (ngModelChange)="valueChanged($event)">
+  <input type="text" name="value" [(ngModel)]="value">
 
-    <p>Name: <input type="text" name="customer.name" [(ngModel)]="customer.name"></p>
-    ```
+  <p>Name: <input type="text" name="customer.name" [(ngModel)]="customer.name"></p>
+  ```
 
--   <b>NG-Model Binding <span style="color: green;">CUSTOM</span></b>:
+- <b>NG-Model Binding <span style="color: green;">CUSTOM</span></b>:
 
-    ```
-    // In the parent view:
-    <childComponent [(count)]="count"></childComponent>
-    <p> Current Count {{count}}</p>
-    <button (click)="clearCount()">Clear</button>
+  ```
+  // In the parent view:
+  <childComponent [(count)]="count"></childComponent>
+  <p> Current Count {{count}}</p>
+  <button (click)="clearCount()">Clear</button>
 
-    // ChildComponent
-    <p>
-      Count: {{ count }}
-      <button (click)="increment()">Increment</button>
-    </p>
-    class ChildComponent{
-      @Input count = 0;
-      // the implicit event-word should end with Change
-      @output countChange: EventEmitter<number> = new EventEmitter<number>();
+  // ChildComponent
+  <p>
+    Count: {{ count }}
+    <button (click)="increment()">Increment</button>
+  </p>
+  class ChildComponent{
+    @Input count = 0;
+    // the implicit event-word should end with Change
+    @output countChange: EventEmitter<number> = new EventEmitter<number>();
 
-      increment() {
-        this.count++;
-        this.countChange.emit(this.count);
-      }
+    increment() {
+      this.count++;
+      this.countChange.emit(this.count);
     }
-    ```
+  }
+  ```
 
--   <b>Input-Output</b>:
+- <b>Input-Output</b>:
 
-    -   [childProp@Input]="parentProp"
-    -   (childEventEmitter@output) ="parentMethod($event)".
+  - [childProp@Input]="parentProp"
+  - (childEventEmitter@output) ="parentMethod($event)".
 
-    ```
-    @Input('customName') childProp;
-    @output childEventEmitter: EventEmitter<any> = new EventEmitter<any>();
+  ```
+  @Input('customName') childProp;
+  @output childEventEmitter: EventEmitter<any> = new EventEmitter<any>();
 
-    // Intercept input property changes with a setter
-    private _customName = '';
-    @Input()
-    set customer(parentProp: Customer) {
-      //You can add some custom logic here
-      this._customerData = customer;
-      console.log(this._customerData)
-    }
-    get customer(): string { return this._customerData; }
-    ```
+  // Intercept input property changes with a setter
+  private _customName = '';
+  @Input()
+  set customer(parentProp: Customer) {
+    //You can add some custom logic here
+    this._customerData = customer;
+    console.log(this._customerData)
+  }
+  get customer(): string { return this._customerData; }
+  ```
 
--   <b>LocalVariable</b>:
-    ```
-     <h2>{{tag.name}}</h2>
-     <childComponent #tag></childComponent>
-     <b>Welcome {{lastName.value}} </b>
-     <input (keyup)="0" type="text" #lastName id="lastName">
-    ```
+- <b>LocalVariable</b>:
+  ```
+   <h2>{{tag.name}}</h2>
+   <childComponent #tag></childComponent>
+   <b>Welcome {{lastName.value}} </b>
+   <input (keyup)="0" type="text" #lastName id="lastName">
+  ```
 
 # View communication Stuff
 
--   > <b>ElemenRef</b>: any html with tagName
-    > `<div #ElementRefDiv></div>`
+- > <b>ElemenRef</b>: any html with tagName
+  > `<div #ElementRefDiv></div>`
 
--   > <b>TemplateRef</b>: (ng-template) with tagName or and var like (let-name or let-wellDone=true): use to instantiate a component or to be used into the template
+- > <b>TemplateRef</b>: (ng-template) with tagName or and var like (let-name or let-wellDone=true): use to instantiate a component or to be used into the template
 
-    ```
-    <ng-template #tpl>
-      <span>I am span in template</span>
-    </ng-template>
-    ```
+  ```
+  <ng-template #tpl>
+    <span>I am span in template</span>
+  </ng-template>
+  ```
 
--   > <b>ViewRef</b>
+- > <b>ViewRef</b>
 
--   > <b>ViewContainerRef</b>: container where one or more view can be attached
-    > has createEmbededView(TemplateRef) or createComponent(ComponentFactoryResolver ... ComponentRef)
+- > <b>ViewContainerRef</b>: container where one or more view can be attached
+  > has createEmbededView(TemplateRef) or createComponent(ComponentFactoryResolver ... ComponentRef)
 
--   > <b>ComponentRef</b>
+- > <b>ComponentRef</b>
 
--   > <b>ng-container-ngComponentOutlet</b>:
+- > <b>ng-container-ngComponentOutlet</b>:
 
-    ```
-    <div *ngIf="details">
-      <div *ngFor="let info of details">
-          {{ info.content }}
-      </div>
-    </div>
-
-    // replace the undesired div with ng-container
-    <ng-container *ngIf="details">
-      <div *ngFor="let info of details">
+  ```
+  <div *ngIf="details">
+    <div *ngFor="let info of details">
         {{ info.content }}
-      </div>
-    </ng-container>
-
-    // ngComponentOutlet
-    <ng-container *ngComponentOutlet="ColorComponentOrTemplate"></ng-container>
-    ```
-
--   > <b>ng-content</b>: is used to project content into Angular components
-
-    ```
-    // in child:
-    <h1>Child Info</h1>
-    <ng-content select="[input], [form-field]"></ng-content>
-
-    // in parent:
-    <app-child>
-      <h1 input>Content1!</h3>
-      <h2 form-field>Content2!</h2>
-      <h3 input form-field>Content1 & Content2!</h1> <------ the used one
-    </app-child>
-    ```
-
--   > <b>ViewChild</b>: Any component, directive, or element which is part of a template is ViewChild and any component or element which is projected in the template is ContentChild
-
-    ```
-    // child: selector app-view-child
-    <div #header>
-      <ng-content></ng-content> [ContentChild] <- the h4 and app-message(MessageComponent) both ll be here
     </div>
+  </div>
 
-    // parent:
-    <app-view-child>
-     <h4 #content></h4>  [ViewChild as ElemenRef]
-     <app-message [message]="message"></app-message> [ViewChild as ComponentRef]
-     //ou
-     <app-message *ngFor="let f of messages" [message]='f'></app-message>
-    </app-view-child>
-
-    @ViewChild(MessageComponent) messageViewChild: MessageComponent;
-    // ou
-    @ViewChildren(MessageComponent) messageViewChildren: QueryList<MessageComponent>;
-
-    constructor(private cd: ChangeDetectorRef) {}
-
-    ngAfterViewInit() {
-      console.log(this.messageViewChild);
-      this.messageViewChild.message = 'Passed as View Child';
-      // ou
-      console.log(this.messageViewChildren);
-      this.messageViewChildren.forEach((item) => { item.message = 'Infragistics';
-
-      // the value will change but the console will show an error
-      // error: Expression has changed after it was last checked
-      This error can be fixed two ways,
-        - By changing the ViewChild property in ngAfterContentInit life cycle hook
-        - Manually calling change detection using ChangeDetectorRef
-
-      solution 1:
-      this.cd.detectChanges();
-    }
-    solution 2:
-    ngAfterContentInit() {
-      this.messageViewChild.message = 'Passed as View Child';
-      //ou
-      this.messageViewChildren.forEach((item) => { item.message = 'Infragistics';
-    }
-    ngOnInit() {
-      this.message = 'Hello World !';
-    }
-    ```
-
--   > <b>ContentChild</b>: Any component, directive, or element which is part of a template is ViewChild and any component or element which is projected in the template is ContentChild
-
-    ```
-    // child: selector app-view-child
-    <div #header>
-      <ng-content select="app-message"></ng-content> [ContentChild] <- only app-message(MessageComponent) ll be here
+  // replace the undesired div with ng-container
+  <ng-container *ngIf="details">
+    <div *ngFor="let info of details">
+      {{ info.content }}
     </div>
+  </ng-container>
 
-    @ContentChild(MessageComponent) MessageComponnetContentChild: MessageComponent;
+  // ngComponentOutlet
+  <ng-container *ngComponentOutlet="ColorComponentOrTemplate"></ng-container>
+  ```
+
+- > <b>ng-content</b>: is used to project content into Angular components
+
+  ```
+  // in child:
+  <h1>Child Info</h1>
+  <ng-content select="[input], [form-field]"></ng-content>
+
+  // in parent:
+  <app-child>
+    <h1 input>Content1!</h3>
+    <h2 form-field>Content2!</h2>
+    <h3 input form-field>Content1 & Content2!</h1> <------ the used one
+  </app-child>
+  ```
+
+- > <b>ViewChild</b>: Any component, directive, or element which is part of a template is ViewChild and any component or element which is projected in the template is ContentChild
+
+  ```
+  // child: selector app-view-child
+  <div #header>
+    <ng-content></ng-content> [ContentChild] <- the h4 and app-message(MessageComponent) both ll be here
+  </div>
+
+  // parent:
+  <app-view-child>
+   <h4 #content></h4>  [ViewChild as ElemenRef]
+   <app-message [message]="message"></app-message> [ViewChild as ComponentRef]
+   //ou
+   <app-message *ngFor="let f of messages" [message]='f'></app-message>
+  </app-view-child>
+
+  @ViewChild(MessageComponent) messageViewChild: MessageComponent;
+  // ou
+  @ViewChildren(MessageComponent) messageViewChildren: QueryList<MessageComponent>;
+
+  constructor(private cd: ChangeDetectorRef) {}
+
+  ngAfterViewInit() {
+    console.log(this.messageViewChild);
+    this.messageViewChild.message = 'Passed as View Child';
     // ou
-    @ContentChildren(MessageComponent) MessageComponnetContentChild: QueryList<MessageComponent>;
+    console.log(this.messageViewChildren);
+    this.messageViewChildren.forEach((item) => { item.message = 'Infragistics';
 
-    ngAfterContentInit() {
-      console.log(this.MessageComponnetContentChild);
-      // in case of ContentChildren
-      this.MessageComponnetContentChild.forEach((m) => m.message = 'Foo');
-    }
+    // the value will change but the console will show an error
+    // error: Expression has changed after it was last checked
+    This error can be fixed two ways,
+      - By changing the ViewChild property in ngAfterContentInit life cycle hook
+      - Manually calling change detection using ChangeDetectorRef
 
-    // parent:
-    <app-view-child>
-     <h4 #content></h4>  [ViewChild as ElemenRef]
-     <app-message [message]="message"></app-message> [ViewChild as ComponentRef]
-     // ou
-     <app-message *ngFor='let m of messages' [message]='m'></app-message>
-    </app-view-child>
-    ```
+    solution 1:
+    this.cd.detectChanges();
+  }
+  solution 2:
+  ngAfterContentInit() {
+    this.messageViewChild.message = 'Passed as View Child';
+    //ou
+    this.messageViewChildren.forEach((item) => { item.message = 'Infragistics';
+  }
+  ngOnInit() {
+    this.message = 'Hello World !';
+  }
+  ```
+
+- > <b>ContentChild</b>: Any component, directive, or element which is part of a template is ViewChild and any component or element which is projected in the template is ContentChild
+
+  ```
+  // child: selector app-view-child
+  <div #header>
+    <ng-content select="app-message"></ng-content> [ContentChild] <- only app-message(MessageComponent) ll be here
+  </div>
+
+  @ContentChild(MessageComponent) MessageComponnetContentChild: MessageComponent;
+  // ou
+  @ContentChildren(MessageComponent) MessageComponnetContentChild: QueryList<MessageComponent>;
+
+  ngAfterContentInit() {
+    console.log(this.MessageComponnetContentChild);
+    // in case of ContentChildren
+    this.MessageComponnetContentChild.forEach((m) => m.message = 'Foo');
+  }
+
+  // parent:
+  <app-view-child>
+   <h4 #content></h4>  [ViewChild as ElemenRef]
+   <app-message [message]="message"></app-message> [ViewChild as ComponentRef]
+   // ou
+   <app-message *ngFor='let m of messages' [message]='m'></app-message>
+  </app-view-child>
+  ```
 
 # MyAppDocker
 
@@ -246,34 +246,34 @@ Custom loader for using also backend data for translation
 
 # Bootstrap
 
--   <b>ngBootstrap</b>
--   <b>ngx-bootstrap</b>:
-    -   better than ngBootstrap
-    -   https://valor-software.com/ngx-bootstrap/#/documentation#getting-started
--   <b>fontAwesome</b>
--   <b>ngSelect</b>
--   <b>Bootstrap-icons</b>
--   <b>ngx-bootstrap-icons</b>: npm i ngx-bootstrap-icons --save
+- <b>ngBootstrap</b>
+- <b>ngx-bootstrap</b>:
+  - better than ngBootstrap
+  - https://valor-software.com/ngx-bootstrap/#/documentation#getting-started
+- <b>fontAwesome</b>
+- <b>ngSelect</b>
+- <b>Bootstrap-icons</b>
+- <b>ngx-bootstrap-icons</b>: npm i ngx-bootstrap-icons --save
 
 # HttpClient - Interceptors
 
--   ok
+- ok
 
 # Directives
 
--   <b>Structure</b>:
+- <b>Structure</b>:
 
-    -   ngFor
-    -   ngSwitch
-    -   ngIf
+  - ngFor
+  - ngSwitch
+  - ngIf
 
--   <b>Attribute</b>:
+- <b>Attribute</b>:
 
-    -   ngClass
-    -   ngStyle
-    -   ngModel
+  - ngClass
+  - ngStyle
+  - ngModel
 
--   <b>Custom directive</b>:
+- <b>Custom directive</b>:
 
 ```
 import { Directive, ElementRef, Input, OnInit } from '@angular/core'
@@ -335,7 +335,7 @@ export class ttToggleDirective {
 
 # pipes
 
--   [pipe-link](https://angular.io/api?query=pipe)
+- [pipe-link](https://angular.io/api?query=pipe)
 
 > <b>Custom</b>:
 
@@ -424,19 +424,19 @@ corgi ---> cardigan
 
 # Service
 
--   ok
+- ok
 
 # Injections
 
--   wip
+- wip
 
 # modules
 
--   ok
+- ok
 
 # router - guard
 
--   ok
+- ok
 
 # Form
 
@@ -520,9 +520,9 @@ pending
 
 # baseHref, deployUrl or APP_BASE_HREF
 
--   If you deploy your Angular app to a subfolder, the ‘--base-href’ is important to generate the correct routes
+- If you deploy your Angular app to a subfolder, the ‘--base-href’ is important to generate the correct routes
 
--   A second parameter that is important is ‘--deploy-url’. This parameter will update the generated url’s for our assets(scripts, css) inside the index.html
+- A second parameter that is important is ‘--deploy-url’. This parameter will update the generated url’s for our assets(scripts, css) inside the index.html
 
 ```
     ng build --prod --base-href /subfolder/ --deploy-url /subfolder/
@@ -657,7 +657,7 @@ ou
 
 # ngRX Store
 
--   OK
+- OK
 
 # Angular Table
 
@@ -665,28 +665,28 @@ ou
 
 is a collection of rich UI components for Angular. All widgets are open source and free to use under MIT License.
 
--   PrimeNG Table -> [Link](https://www.primefaces.org/primeng/#/table)
+- PrimeNG Table -> [Link](https://www.primefaces.org/primeng/#/table)
 
 > npm install primeng --save
 
--   <b>Features</b>:
-    -   Filter
-    -   Paginator
-    -   Sorting
-    -   Dynamic Columns
-    -   Row Expansion
-    -   Style
-    -   Sections
-    -   Column Grouping
-    -   Row Grouping
-    -   Data Export
-        -Selection
-    -   Context Menu
-    -   Editing
-    -   Column Reordering
-    -   Scrolling
-    -   Lazy Loading
-    -   Responsive
+- <b>Features</b>:
+  - Filter
+  - Paginator
+  - Sorting
+  - Dynamic Columns
+  - Row Expansion
+  - Style
+  - Sections
+  - Column Grouping
+  - Row Grouping
+  - Data Export
+    -Selection
+  - Context Menu
+  - Editing
+  - Column Reordering
+  - Scrolling
+  - Lazy Loading
+  - Responsive
 
 ## ngx-datatable
 
@@ -697,31 +697,31 @@ go to [Link](https://swimlane.github.io/ngx-datatable/)
 
 > npm install @swimlane/ngx-datatable
 
--   <b>Features</b>:
-    -   Handle large data sets ( Virtual DOM )
-    -   Expressive Header and Cell Templates
-    -   Horizontal & Vertical Scrolling
-    -   Column Reordering & Resizing
-    -   Client/Server side Pagination & Sorting
-    -   Intelligent Column Width Algorithms ( Force-fill & Flex-grow )
-    -   Integrated Pager
-    -   Cell & Row Selection ( Single, Multi, Keyboard, Checkbox )
-    -   Fixed AND Fluid height
-    -   Left and Right Column Pinning
-    -   Row Detail View
-    -   Inline Editing
-    -   Decoupled theme’ing with included Google
-    -   Material theme
-    -   Light codebase / No external dependencies
-    -   AoT Compilation Support
-    -   Universal Support
+- <b>Features</b>:
+  - Handle large data sets ( Virtual DOM )
+  - Expressive Header and Cell Templates
+  - Horizontal & Vertical Scrolling
+  - Column Reordering & Resizing
+  - Client/Server side Pagination & Sorting
+  - Intelligent Column Width Algorithms ( Force-fill & Flex-grow )
+  - Integrated Pager
+  - Cell & Row Selection ( Single, Multi, Keyboard, Checkbox )
+  - Fixed AND Fluid height
+  - Left and Right Column Pinning
+  - Row Detail View
+  - Inline Editing
+  - Decoupled theme’ing with included Google
+  - Material theme
+  - Light codebase / No external dependencies
+  - AoT Compilation Support
+  - Universal Support
 
 ## ag-Grid
 
 ag-Grid have two versions :
 
--   Free Version
--   Enterprise Version
+- Free Version
+- Enterprise Version
 
 Free Version comes with limited features, but it comes with all the important features that are required for normal data-table.
 
@@ -729,30 +729,30 @@ Free Version comes with limited features, but it comes with all the important fe
 
 > npm install --save ag-grid-angular ag-grid
 
--   <b>Features</b>:
+- <b>Features</b>:
 
-    -   Aligned Grids
-    -   Cell Editing
-    -   Column Filter, Column Groups, Column Moving, Column Pinning, Column Resizing
-    -   CSV Export
-    -   Quick Filter, Custom Filter, Date Filter
-    -   Keyboard Navigation
-    -   Pagination
-    -   Row Selection, Row Sorting, Row Dragging
-    -   Cell Rendering, Cell Style
-    -   Internationalisation
-    -   Overlays
-    -   Real-Time Updating Data
+  - Aligned Grids
+  - Cell Editing
+  - Column Filter, Column Groups, Column Moving, Column Pinning, Column Resizing
+  - CSV Export
+  - Quick Filter, Custom Filter, Date Filter
+  - Keyboard Navigation
+  - Pagination
+  - Row Selection, Row Sorting, Row Dragging
+  - Cell Rendering, Cell Style
+  - Internationalisation
+  - Overlays
+  - Real-Time Updating Data
 
--   <b>Addition features of ag-Grid for Enterprise version</b>:
-    -   Aggregation
-    -   Clipboard
-    -   Column Menu, Context Menu
-    -   Excel Export
-    -   Grouping Rows, Master/Detail
-    -   Pivoting, Range Selection
-    -   Status Bar, Tool Panel
-    -   Tree Data
+- <b>Addition features of ag-Grid for Enterprise version</b>:
+  - Aggregation
+  - Clipboard
+  - Column Menu, Context Menu
+  - Excel Export
+  - Grouping Rows, Master/Detail
+  - Pivoting, Range Selection
+  - Status Bar, Tool Panel
+  - Tree Data
 
 > Note : As per user review ag-Grid have performance issue’s in some cases, also it doesn’t look proper in some browser.
 
@@ -764,12 +764,12 @@ go to [Link](https://material.angular.io/components/table/overview)
 
 # chart
 
--   ngx-charts: [link](https://swimlane.gitbook.io/ngx-charts/)
-    -   [How To Use Ngx-Charts In Angular Application](https://www.ngdevelop.tech/how-to-use-ngx-charts-in-angular/)
--   ngx-echarts: [link](https://echarts.apache.org/en/index.html)
--   ng2-charts: [link](https://www.npmjs.com/package/ng2-charts)
--   angular-plotly.js
--   PrimeNG Charts
+- ngx-charts: [link](https://swimlane.gitbook.io/ngx-charts/)
+  - [How To Use Ngx-Charts In Angular Application](https://www.ngdevelop.tech/how-to-use-ngx-charts-in-angular/)
+- ngx-echarts: [link](https://echarts.apache.org/en/index.html)
+- ng2-charts: [link](https://www.npmjs.com/package/ng2-charts)
+- angular-plotly.js
+- PrimeNG Charts
 
 ...
 

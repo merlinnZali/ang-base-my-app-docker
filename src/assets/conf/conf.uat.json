@@ -1,7 +1,7 @@
 {
-    "apiUrl": "http://localhost:8081/api/v1/",
-    "hello": "This was loaded from config.uat.json",
-    "serverUrl": "http://localhost:8081/api/v1/",
-    "clientId": "clientId",
-    "isServed": true
+  "apiUrl": "http://localhost:8081/api/v1/",
+  "hello": "This was loaded from config.uat.json",
+  "serverUrl": "http://localhost:8081/api/v1/",
+  "clientId": "clientId",
+  "isServed": true
 }

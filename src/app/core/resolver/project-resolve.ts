@@ -5,14 +5,14 @@ import { EnvironmentLoaderService } from '../config/environment-loader.service'
 
 @Injectable({ providedIn: 'root' })
 export class ProjectResolve implements Resolve<boolean> {
-    // inject the service
-    constructor(private configService: EnvironmentLoaderService) {}
+  // inject the service
+  constructor(private configService: EnvironmentLoaderService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-        // log the value of the configuration here
-        // if this is too soon, the result is undefined
-        //console.log('on resolve', this.configService.get().serverUrl);
-        /*
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    // log the value of the configuration here
+    // if this is too soon, the result is undefined
+    //console.log('on resolve', this.configService.get().serverUrl);
+    /*
     // in resolver, need to take 1 and return
     // This is the first attempt
     return this.configService.config$.pipe(
@@ -48,12 +48,12 @@ export class ProjectResolve implements Resolve<boolean> {
       })
     );
     */
-        return this.configService.config$.pipe(
-            first((n) => n['isServed']),
-            map((n) => {
-                return true
-            })
-        )
-        // return of(true)
-    }
+    return this.configService.config$.pipe(
+      first(n => n['isServed']),
+      map(n => {
+        return true
+      })
+    )
+    // return of(true)
+  }
 }

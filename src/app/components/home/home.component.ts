@@ -6,41 +6,41 @@ import { EnvConfig } from 'src/app/core/config/env-config'
 import { Observable } from 'rxjs'
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss'],
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-    protected envConfig!: EnvConfig
-    config$: Observable<EnvConfig> = this.envService.config$
+  protected envConfig!: EnvConfig
+  config$: Observable<EnvConfig> = this.envService.config$
 
-    title = 'my-app-docker'
-    param = { value: 'world' }
+  title = 'my-app-docker'
+  param = { value: 'world' }
 
-    modalRef?: BsModalRef
-    selectedGender = 'male'
-    itemQuantity = '1'
+  modalRef?: BsModalRef
+  selectedGender = 'male'
+  itemQuantity = '1'
 
-    selectedCar!: number
+  selectedCar!: number
 
-    cars = [
-        { id: 1, name: 'Volvo' },
-        { id: 2, name: 'Saab' },
-        { id: 3, name: 'Opel' },
-        { id: 4, name: 'Audi' },
-    ]
+  cars = [
+    { id: 1, name: 'Volvo' },
+    { id: 2, name: 'Saab' },
+    { id: 3, name: 'Opel' },
+    { id: 4, name: 'Audi' },
+  ]
 
-    constructor(
-        protected envService: EnvironmentLoaderService,
-        private modalService: BsModalService,
-        public translate: TranslateService
-    ) {}
+  constructor(
+    protected envService: EnvironmentLoaderService,
+    private modalService: BsModalService,
+    public translate: TranslateService
+  ) {}
 
-    ngOnInit(): void {
-        this.envConfig = this.envService.get()
-    }
+  ngOnInit(): void {
+    this.envConfig = this.envService.get()
+  }
 
-    openModal(template: TemplateRef<any>) {
-        this.modalRef = this.modalService.show(template)
-    }
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template)
+  }
 }
