@@ -1,13 +1,13 @@
 {
-    "HOME": {
-      "TITLE": "Hello Angular with ngx-translate!",
-      "SELECT": "Change language"
-    },
-    "HELLO": "hello {value}",
-    "HELLO2": "hello2 {value}",
-    "WITH_HTML_TEXT": "Welcome to my Angular application!<br><strong>This is an amazing app which uses the latest technologies!</strong>",
-    "pluralization": {
-      "items": "You have selected {count, plural, =0{nothing} one{one} other{multiple}} {count, plural, =0{} one{item} other{items}}.",
-      "gender": "{gender, select, male{He is a man} female{She is a woman} other{They are humans}} {param}."
-    }
+  "HOME": {
+    "TITLE": "Hello Angular with ngx-translate!",
+    "SELECT": "Change language"
+  },
+  "HELLO": "hello {value}",
+  "HELLO2": "hello2 {value}",
+  "WITH_HTML_TEXT": "Welcome to my Angular application!<br><strong>This is an amazing app which uses the latest technologies!</strong>",
+  "pluralization": {
+    "items": "You have selected {count, plural, =0{nothing} one{one} other{multiple}} {count, plural, =0{} one{item} other{items}}.",
+    "gender": "{gender, select, male{He is a man} female{She is a woman} other{They are humans}} {param}."
+  }
 }

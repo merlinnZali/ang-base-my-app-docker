@@ -1,61 +1,59 @@
+@import '/src/assets/theme/red.scss';
+@import '/src/assets/theme/blue.scss';
+@import '/src/assets/theme/green.scss';
 
-@import "/src/assets/theme/red.scss";
-@import "/src/assets/theme/blue.scss";
-@import "/src/assets/theme/green.scss";
-
-@import "variables";
+@import 'variables';
 // bootstrap/scss/functions
 // bootstrap/scss/variables
 // bootstrap/scss/mixins
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
 
-@import "functions";
-@import "mixins";
+@import 'functions';
+@import 'mixins';
 // ng-select theme
-@import "~@ng-select/ng-select/themes/default.theme.css";
+@import '~@ng-select/ng-select/themes/default.theme.css';
 //@import "~@ng-select/ng-select/scss/default.theme.scss";
 // bootstrap scss
 //@import "~bootstrap/dist/css/bootstrap.min.css";
 @import '~bootstrap/scss/bootstrap';
-@import "../assets/scss/custom.scss";
+@import '../assets/scss/custom.scss';
 // import other plugin or lib css
-
-
 
 //---------------set theme---------------//
 .red {
-    @include set-theme($red-value-map);
+  @include set-theme($red-value-map);
 }
 
 .blue {
-    @include set-theme($blue-value-map);
+  @include set-theme($blue-value-map);
 }
 
 .green {
-    @include set-theme($green-value-map);
+  @include set-theme($green-value-map);
 }
-
 
 @import 'fonts';
 @import 'material-icons.scss';
 
-html, body { height: 100%; }
+html,
 body {
-    margin: 0;
-    font-family: 'Roboto', "Helvetica Neue", sans-serif;
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
 }
 
-
-button{
+button {
   font-family: 'Montserrat', sans-serif;
 }
 
 .font-size-byFunct {
-    font-size: calculate-rem(16);
+  font-size: calculate-rem(16);
 }
 
 .font-size-byMixin {
-    @include font-size(16);
+  @include font-size(16);
 }

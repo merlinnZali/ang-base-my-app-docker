@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
-import { environment } from "src/environments/environment";
+import { Injectable } from '@angular/core'
+import { environment } from 'src/environments/environment'
 
 @Injectable({
-    providedIn: 'root'
-  })
-  export class AppConfig {
-    /*envConfig!: EnvConfig;
+  providedIn: 'root',
+})
+export class AppConfig {
+  /*envConfig!: EnvConfig;
   
     constructor(private http: HttpClient) {}
   
@@ -26,4 +26,4 @@ import { environment } from "src/environments/environment";
       return this.envConfig;
     }
   */
-  }
+}
